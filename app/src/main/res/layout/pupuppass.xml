@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#aeb7b7b7"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CODE EXCHANGE"
+                    android:id="@+id/textView4"
+                    android:textColor="#010101"
+                    android:textSize="45dp"
+                    android:background="#a7a9a4" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:weightSum="1"
+                android:gravity="center_vertical|center_horizontal"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  ASK :"
+                    android:id="@+id/textView23"
+                    android:textSize="40dp"
+                    android:textColor="#040404"
+                    android:layout_marginLeft="200dp" />
+
+                <EditText
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/edit_ack"
+                    android:layout_weight="0.42"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="text"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Countdown Time :"
+                    android:id="@+id/textView8"
+                    android:textColor="#ff0a00"
+                    android:layout_marginLeft="25dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/textView9"
+                    android:text="0"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#ff0700" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:weightSum="1"
+
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+
+
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" REPLY : "
+                    android:id="@+id/textView24"
+                    android:textSize="40dp"
+                    android:textColor="#080808" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:id="@+id/edit_reply"
+                    android:layout_weight="0.32"
+                    android:focusableInTouchMode="false"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:inputType="text"
+                    android:textSize="25dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="274dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50.25dp"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:id="@+id/but_1"
+                        android:background="@drawable/buttonnum" />
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:id="@+id/but_2"
+                        android:background="@drawable/buttonnum" />
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="3"
+                        android:id="@+id/but_3"
+                        android:background="@drawable/buttonnum" />
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="A"
+                        android:id="@+id/but_A"
+                        android:background="@drawable/buttonnum" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50.25dp"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="4"
+                        android:id="@+id/but_4"
+                        android:background="@drawable/buttonnum" />
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:id="@+id/but_5"
+                        android:background="@drawable/buttonnum" />
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="6"
+                        android:id="@+id/but_6"
+                        android:background="@drawable/buttonnum" />
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="B"
+                        android:id="@+id/but_B"
+                        android:background="@drawable/buttonnum" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50.25dp"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="8"
+                        android:id="@+id/but_8"
+                        android:background="@drawable/buttonnum" />
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="7"
+                        android:id="@+id/but_7"
+                        android:background="@drawable/buttonnum" />
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="9"
+                        android:id="@+id/but_9"
+                        android:background="@drawable/buttonnum" />
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="C"
+                        android:id="@+id/but_C"
+                        android:background="@drawable/buttonnum" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:id="@+id/but_0"
+                        android:background="@drawable/buttonnum" />
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="F"
+                        android:id="@+id/but_F"
+                        android:background="@drawable/buttonnum" />
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="E"
+                        android:id="@+id/but_E"
+                        android:background="@drawable/buttonnum" />
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="D"
+                        android:id="@+id/but_D"
+                        android:background="@drawable/buttonnum" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="OK"
+                        android:id="@+id/but_ok"
+                        android:background="@drawable/buttonnum" />
+
+                    <Button
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:text="CLR"
+                        android:id="@+id/but_cl"
+                        android:background="@drawable/buttonnum" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

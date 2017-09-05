@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <group android:checkableBehavior="single">
+      <item
+          android:checkable="false"
+          android:enabled="false"
+          android:title="RTB SELETED" />
+    <item
+        android:id="@+id/menu_RTB1"
+        android:title="RTB1" />
+    <item
+    android:id="@+id/menu_RTB2"
+    android:title="RTB2" />
+    <item
+        android:id="@+id/menu_RTB3"
+        android:title="RTB3" />
+    <item
+        android:id="@+id/menu_RTB4"
+        android:title="RTB4" />
+    <item
+        android:id="@+id/menu_RTB5"
+        android:title="RTB5" />
+    <item
+        android:id="@+id/menu_RTB6"
+        android:title="RTB6" />
+  </group>
+
+</menu>

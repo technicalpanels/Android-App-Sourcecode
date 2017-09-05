@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_connectionTypes"
+        android:title="Connection Types">
+        <menu>
+            <group
+                android:id="@+id/groupConnection"
+                android:checkableBehavior="single">
+                <item
+                    android:checkable="false"
+                    android:enabled="false"
+                    android:title="Connection Types" />
+                <item
+                    android:id="@+id/menu_usb"
+                    android:icon="@drawable/usb"
+                    android:title="Connect USB" />
+                <item
+                    android:id="@+id/menu_wifi"
+                    android:icon="@drawable/wifi"
+                    android:title="Connect Wifi" />
+            </group>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_configure"
+        android:title="Configure" />
+    <item
+        android:id="@+id/menu_senddata"
+        android:title="Send data to server" />
+    <item
+        android:id="@+id/menu_savetxtfile"
+        android:title="Save to text a file" />
+
+</menu>

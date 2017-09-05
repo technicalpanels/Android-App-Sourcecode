@@ -1,0 +1,488 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.example.ntd.tpapplication.ConfigurePage" >
+    <TextView
+        android:id="@+id/text_header"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:textSize="60dp" android:text="Config"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="@drawable/circleg"
+        android:textColor="#ffffff" />
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="1000dp"
+    android:id="@+id/scrollView3"
+    android:fillViewport="false"
+    android:scrollbarStyle="outsideInset"
+    android:isScrollContainer="true"
+    android:scrollbars="vertical"
+    android:layout_below="@+id/text_header">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="1"
+        android:rowCount="8"
+        android:background="@drawable/circleg"
+         >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="Vehicle Number"
+                android:textColor="#ffffff"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:singleLine="false" />
+
+            <EditText
+            android:id="@+id/edit_vehicle_number"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/textView5"
+            android:layout_toRightOf="@+id/textView5"
+            android:background="@drawable/circle"
+                android:imeOptions="actionDone|flagNoExtractUi"
+                android:inputType="textShortMessage|textCapCharacters"
+            android:autoText="false"
+            android:maxLength="5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+            android:id="@+id/textView6"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_alignLeft="@+id/textView5"
+            android:layout_alignStart="@+id/textView5"
+            android:layout_below="@+id/textView5"
+                android:text="Distance meter"
+            android:textColor="#ffffff"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:singleLine="false"
+                android:layout_marginLeft="20dp" />
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="New ToggleButton"
+                android:id="@+id/btn_set_Start_Stop"
+                android:layout_alignTop="@+id/textView6"
+                android:layout_alignRight="@+id/edit_short_distance"
+                android:layout_alignEnd="@+id/edit_short_distance"
+                android:layout_alignLeft="@+id/edit_short_distance"
+                android:layout_alignStart="@+id/edit_short_distance"
+                android:layout_above="@+id/textView13"
+                android:checked="false"
+
+
+                android:textOff="STOP"
+                android:textOn="START"
+                android:gravity="center_vertical|center|center_horizontal"
+                android:layout_weight="0.31" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:text="Distance Limit"
+                    android:textColor="#ffffff"
+                    android:textSize="30dp"
+                        android:textStyle="bold"
+                    android:singleLine="false"
+                        android:layout_below="@+id/textView6"
+                        android:layout_alignLeft="@+id/textView6"
+                        android:layout_alignStart="@+id/textView6"
+                        android:layout_marginLeft="40dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:text="Short"
+                    android:textColor="#ffffff"
+                    android:textSize="30dp"
+                    android:textStyle="italic"
+                    android:layout_alignTop="@+id/edit_short_distance"
+                    android:layout_toLeftOf="@+id/edit_short_distance"
+                    android:layout_toStartOf="@+id/edit_short_distance" />
+
+                    <EditText
+                        android:id="@+id/edit_short_distance"
+                        android:layout_width="200dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/circle"
+                        android:imeOptions="actionDone|flagNoExtractUi"
+                        android:inputType="number"
+                        android:layout_alignParentTop="false"
+                        android:layout_alignParentLeft="false"
+                        android:layout_below="@+id/textView13"
+                        android:gravity="center"
+                        android:layout_alignLeft="@+id/edit_vehicle_number"
+                        android:maxLength="5" />
+
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="m"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"
+                        android:textStyle="italic"
+                        android:layout_above="@+id/textView18"
+                        android:layout_toRightOf="@+id/edit_short_distance"
+                        android:layout_toEndOf="@+id/edit_short_distance"
+                        android:layout_marginLeft="20dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:text="Medium"
+                    android:textColor="#ffffff"
+                    android:textSize="30dp"
+                    android:textStyle="italic"
+                    android:layout_below="@+id/textView17"
+                    android:layout_alignLeft="@+id/textView16"
+                    android:layout_alignStart="@+id/textView16"
+                        android:layout_gravity="left" />
+
+                    <EditText
+                        android:id="@+id/edit_medium_distance"
+                        android:layout_width="200dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/circle"
+                        android:imeOptions="actionDone|flagNoExtractUi"
+                        android:inputType="number"
+                        android:layout_alignLeft="@+id/edit_vehicle_number"
+                        android:layout_below="@+id/textView14"
+                        android:layout_alignRight="@+id/edit_short_distance"
+                        android:layout_alignEnd="@+id/edit_short_distance"
+                        android:gravity="center"
+                        android:maxLength="5" />
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="m"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"
+                        android:layout_alignTop="@+id/edit_medium_distance"
+                        android:layout_alignLeft="@+id/textView17"
+                        android:layout_alignStart="@+id/textView17"
+                        android:textStyle="italic"
+                        android:layout_marginLeft="20dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:text="Long"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"
+                        android:layout_below="@+id/textView15"
+                        android:layout_toLeftOf="@+id/edit_long_distance"
+                        android:textStyle="italic"
+                        android:layout_gravity="left" />
+
+                    <EditText
+                    android:id="@+id/edit_long_distance"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/circle"
+                    android:imeOptions="actionDone|flagNoExtractUi"
+                    android:inputType="number"
+                    android:layout_below="@+id/textView15"
+                    android:layout_alignRight="@+id/edit_medium_distance"
+                    android:layout_alignEnd="@+id/edit_medium_distance"
+                        android:layout_alignLeft="@+id/edit_vehicle_number"
+                    android:maxLength="5"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/textView19"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="m"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"
+                        android:layout_below="@+id/textView18"
+                        android:layout_alignLeft="@+id/textView18"
+                        android:layout_alignStart="@+id/textView18"
+                        android:textStyle="italic"
+                        android:layout_marginLeft="20dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:text="Key Number"
+                android:textColor="#ffffff"
+                android:textSize="30dp"
+                android:layout_below="@+id/textView16"
+                android:layout_alignLeft="@+id/textView13"
+                android:textStyle="bold"
+                android:singleLine="false"
+                android:layout_marginLeft="20dp" />
+
+            <EditText
+                android:id="@+id/editNumber"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle"
+                android:imeOptions="actionDone|flagNoFullscreen"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_alignTop="@+id/textView20"
+                android:layout_toRightOf="@+id/textView16"
+                android:layout_toEndOf="@+id/textView16"
+                android:maxLength="5"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:focusable="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:id="@+id/TextTitelpass"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:text="Password"
+                android:textColor="#ffffff"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:singleLine="false"
+                android:layout_below="@+id/edit_keynumber"
+                android:layout_alignLeft="@+id/textView20"
+                android:layout_marginLeft="20dp" />
+
+            <EditText
+                android:id="@+id/edit_Password"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle"
+                android:imeOptions="actionDone|flagNoFullscreen|flagNoExtractUi"
+                android:gravity="center"
+                android:layout_below="@+id/textView20"
+                android:layout_alignLeft="@+id/edit_keynumber"
+                android:maxLength="8"
+                android:elegantTextHeight="false"
+                android:inputType="textShortMessage|textMultiLine"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:clickable="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:text="Accelerometer"
+                    android:textColor="#ffffff"
+                    android:textSize="30dp"
+                    android:textStyle="bold"
+                    android:singleLine="false"
+                    android:layout_below="@+id/textView20"
+                    android:layout_alignLeft="@+id/textView20"
+                    android:layout_marginLeft="20dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        android:text="Acceleration Limit"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"
+                        android:textStyle="italic"
+                        android:layout_below="@+id/textView21"
+                        android:layout_alignLeft="@+id/textView21"
+                        android:layout_alignStart="@+id/textView21"
+                        android:layout_toStartOf="@+id/edit_vehicle_number"
+                        android:layout_toLeftOf="@+id/edit_vehicle_number"
+                        android:layout_marginLeft="20dp" />
+
+                    <EditText
+                        android:id="@+id/edit_acceleration_limit"
+                        android:layout_width="200dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/circle"
+                        android:imeOptions="actionDone|flagNoFullscreen|flagNoExtractUi"
+                        android:inputType="numberDecimal"
+                        android:gravity="center"
+                        android:layout_alignTop="@+id/textView22"
+                        android:layout_toRightOf="@+id/textView16"
+                        android:layout_toEndOf="@+id/textView16"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:longClickable="false" />
+
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="G"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"
+                        android:textStyle="italic"
+                        android:layout_alignTop="@+id/edit_acceleration_limit"
+                        android:layout_alignLeft="@+id/textView19"
+                        android:layout_alignStart="@+id/textView19"
+                        android:layout_marginLeft="20dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_vertical|center_horizontal"
+            >
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text="Save"
+                android:id="@+id/btn_save_config"
+                android:textColor="#000000"
+                android:textSize="25dp"
+                android:background="@drawable/save"
+                android:layout_below="@+id/textView7"
+                android:layout_alignLeft="@+id/edit_acceleration_limit"
+                android:layout_alignStart="@+id/edit_acceleration_limit"
+                android:layout_gravity="center"
+                android:gravity="center_vertical|center_horizontal" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Exit Config"
+                android:id="@+id/btn_cancel_config"
+                android:textColor="#ff0808"
+                android:textSize="25dp"
+                android:layout_alignTop="@+id/btn_save_config"
+                android:layout_toRightOf="@+id/textView7"
+                android:layout_toEndOf="@+id/textView7"
+                android:layout_marginLeft="20dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Fm"
+                android:id="@+id/btn_uploadfm"
+                android:textColor="@color/link_text_material_light"
+                android:textSize="25dp"
+                android:layout_alignTop="@+id/btn_save_config"
+                android:layout_toRightOf="@+id/textView7"
+                android:layout_toEndOf="@+id/textView7"
+                android:layout_marginLeft="20dp"/>
+
+        </LinearLayout>
+    </GridLayout>
+</ScrollView>
+
+</RelativeLayout>

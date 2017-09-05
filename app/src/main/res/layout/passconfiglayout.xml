@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#aeb7b7b7"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="362dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PASSWORD TO CONFIG"
+                    android:id="@+id/textView4"
+                    android:textColor="#010101"
+                    android:textSize="40dp"
+                    android:background="#a7a9a4" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:weightSum="1"
+
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+
+
+                >
+
+                <EditText
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/PassC_EditText"
+                    android:layout_weight="0.32"
+
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:focusableInTouchMode="true"
+                    android:imeOptions="actionDone|flagNoFullscreen"
+                    android:inputType="textPassword|textShortMessage|text"
+                    android:textSize="25dp"
+                    android:editable="true"
+                    android:enabled="true"
+                    android:background="#fcfdff"
+                    android:maxLength="8" />
+
+
+
+
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="274dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical|center_horizontal">
+
+                    <Button
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:text="OK"
+                        android:id="@+id/Pass_butok"
+                        android:background="@drawable/buttonnum" />
+
+                    <Button
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="CLR"
+                        android:id="@+id/Pass_butcl"
+                        android:background="@drawable/buttonnum" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

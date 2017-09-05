@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Security Control</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="str_mode1">Secure</string>
+    <string name="str_mode2">Depo</string>
+    <string name="str_mode3">Park</string>
+    <string name="str_mode4">Secure to Secure</string>
+    <string name="str_mode5">Crew Change</string>
+    <string name="str_mode6">MAINT</string>
+    <string name="str_mode7">SOS</string>
+    <string name="str_mode8">RTB</string>
+    <string name="odometer_inactive">Odometer\nInactive</string>
+    <string name="odometer_active">Odometer\nActive</string>
+
+    <color name="white">#FFFFFF</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF00</color>
+    <string name="title_activity_server">ServerActivity</string>
+    <string name="title_activity_client_test">ClientTest</string>
+    <string name="title_activity_test_uart">TestUART</string>
+    <string name="title_activity_connection">ConnectionActivity</string>
+    <string name="title_activity_configure_page">ConfigurePage</string>
+    <string name="title_activity_test_pin">TestPin</string>
+    <string name="str_input"><u>Input</u></string>
+    <string name="str_output"><u>Output</u></string>
+    <string name="title_activity_encryption_center">Code Generator</string>
+    <string-array name="spinner1">
+        <item>ON</item>
+        <item>MEP</item>>
+        <item>TWP</item>>
+        <item>TRP</item>>
+    </string-array>
+    <string-array name="spinnerIN">
+        <item>SECURE</item>
+        <item>DEPO</item>>
+        <item>PARKING</item>>
+        <item>S2S</item>>
+        <item>CREWCHANGE</item>>
+        <item>MAINTEN</item>>
+        <item>RTB1</item>>
+        <item>RTB2</item>>
+        <item>RTB3</item>>
+        <item>RTB4</item>>
+        <item>RTB5</item>>
+        <item>RTB6</item>>
+        <item>SOS</item>>
+    </string-array>
+
+
+
+</resources>
