@@ -1,5 +1,7 @@
 package com.example.ntd.tpapplication;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -12,6 +14,7 @@ public class RR2F {
     static private void DEBUG_PRINT(String msg, Object... args)
     {
         //System.out.println("RR2F DEBUG> " + String.format(msg, args));
+        Log.d("RR2F_INSIDE", String.format(msg, args));
     }
 
     /************************************************************
@@ -32,6 +35,9 @@ public class RR2F {
 
     static final private int TX_STATE_IDLE = 0;
     static final private int TX_STATE_WRITING = 1;
+
+    static final private int PING_STATE_IDLE = 0;
+    static final private int PING_STATE_PINGING = 1;
 
     static final private int PRTCL_STATE_FIND_HD = 0;
     static final private int PRTCL_STATE_FIND_FC = 1;
@@ -84,6 +90,7 @@ public class RR2F {
     private boolean ConnectionStatus = false;
 
     private int TxState = TX_STATE_IDLE;
+    private int PingState = PING_STATE_IDLE;
     private byte[] TxBuf = new byte[0];
     private int TxBufHead;
     private int TxBufTail;
@@ -165,8 +172,6 @@ public class RR2F {
 
         if (TxQueue.size() == 0) {
             TxQueue.add(data);
-
-            TxState = TX_STATE_WRITING;
             /* Process writing start here. */
             sendDataInQueue();
         } else {
@@ -294,8 +299,10 @@ public class RR2F {
      ************************************************************/
     private void pingAckHandler(RR2FPrtcl msg)
     {
+        PingState = PING_STATE_IDLE;
+
         /* Process restart timer here. */
-        restartPingTimeoutTimer();
+        stopPingTimeoutTimer();
         if (ConnectionStatus != true) {
             ConnectionStatus = true;
             rr2fConnected();
@@ -320,11 +327,17 @@ public class RR2F {
                 //onPingNeeded();                               //  When has data remain Wait for next Ping !!!
                 DEBUG_PRINT("There are data remaining.");
             }
+        } else {
+            sendDataInQueue();
         }
     }
 
     private void sendDataInQueue()
     {
+        if (PingState != PING_STATE_IDLE) {
+            return;
+        }
+
         if (TxQueue.size() > 0) {
             /* Refill TxBuf from TxQueue. */
             TxBuf = TxQueue.get(0);
@@ -424,18 +437,27 @@ public class RR2F {
 
     private void onPingNeeded()
     {
+        restartPingTimer();
+
+        if ((TxState != TX_STATE_IDLE) || (PingState != PING_STATE_IDLE)) {
+            return;
+        }
+
         RR2FPrtcl msg = new RR2FPrtcl();
         msg.setFC(RR2FPrtcl.PRTCL_FC_FLAG_PIN);
         msg.reCalculateECD();
 
+        PingState = PING_STATE_PINGING;
+        startPingTimeoutTimer();
         rr2fOutput(msg.getByteArray());
-        restartPingTimer();
     }
 
     private void onPingTimeout()
     {
         ConnectionStatus = false;
+        PingState = PING_STATE_IDLE;
         rr2fDisconnected();
+        sendDataInQueue();
     }
 
     /************************************************************

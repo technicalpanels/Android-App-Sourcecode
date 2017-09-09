@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.hardware.usb.UsbAccessory;
 import android.hardware.usb.UsbManager;
 import android.os.ParcelFileDescriptor;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.FileDescriptor;
@@ -20,6 +21,13 @@ import java.io.Serializable;
  * Created by ntd on 09/10/2015.
  */
 public class InterfaceFT311 implements Serializable {
+
+    public interface ConnectionInterface {
+        void aoaAttached();
+        void aoaDetached();
+    }
+
+    private static InterfaceFT311 g_instance = null;
 
     public String ManufacturerString = "mManufacturer=FTDI";
     public String ModelString1 = "mModel=FTDIUARTDemo";
@@ -43,6 +51,10 @@ public class InterfaceFT311 implements Serializable {
     private byte[] usbdata;
     private byte[] writeusbdata;
 
+    private boolean is_attached = false;
+
+    ConnectionInterface connection_interface = null;
+
     private final int BAUDRATE = 115200;
 
     private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
@@ -50,26 +62,31 @@ public class InterfaceFT311 implements Serializable {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
 
-            if (ACTION_USB_PERMISSION.equals(action))
-            {
-                synchronized (this)
-                {
+            if (ACTION_USB_PERMISSION.equals(action)) {
+                synchronized (this) {
                     UsbAccessory accessory = intent.getParcelableExtra(UsbManager.EXTRA_ACCESSORY);
-                    if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false))
-                    {
-                        if (accessory != null)
-                        {
+                    if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
+                        if (accessory != null) {
                             MessageBox("After Permission");
                             OpenAccessory(accessory);
                             SetConfigAfterPermission();
                             GlobalVariable.connectionType = 1;
+
+                            Log.d("USB", "USB permit.\r\n");
+                            if (connection_interface != null) {
+                                connection_interface.aoaAttached();
+                            }
                         }
-                    } else {
                     }
                 }
+            } else if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
+                Log.d("USB", "USB attached.\r\n");
+                is_attached = true;
             } else if (Intent.ACTION_POWER_CONNECTED.equals(action)) {
                 // ResumeConnection();
             } else if (UsbManager.ACTION_USB_ACCESSORY_DETACHED.equals(action)) {
+                Log.d("USB", "USB detached.\r\n");
+                is_attached = false;
                 System.exit(0);
                 GlobalVariable.connectionType = -1;
                 DestroyAccessory(true);
@@ -88,6 +105,16 @@ public class InterfaceFT311 implements Serializable {
 
     }
 
+    public static InterfaceFT311 instance(Context ctx) {
+        if (g_instance == null) {
+            g_instance = new InterfaceFT311(ctx);
+        } else {
+
+        }
+
+        return g_instance;
+    }
+
     InterfaceFT311(Context context) {
 
         this.global_context = context;
@@ -103,6 +130,7 @@ public class InterfaceFT311 implements Serializable {
         mPermissionIntent = PendingIntent.getBroadcast(context, 0, new Intent(ACTION_USB_PERMISSION), 0);
         IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
         filter.addAction(Intent.ACTION_POWER_CONNECTED);
+        filter.addAction(UsbManager.ACTION_USB_ACCESSORY_ATTACHED);
         filter.addAction(UsbManager.ACTION_USB_ACCESSORY_DETACHED);
 //        try {
 //            context.unregisterReceiver(mUsbReceiver);
@@ -115,6 +143,16 @@ public class InterfaceFT311 implements Serializable {
         inputstream = null;
         outputstream = null;
         // ResumeConnection();
+    }
+
+    public void setConnectionInterface(ConnectionInterface iface)
+    {
+        connection_interface = iface;
+    }
+
+    public boolean isAttached()
+    {
+        return is_attached;
     }
 
     public void SetConfigAfterPermission() {
@@ -277,6 +315,7 @@ public class InterfaceFT311 implements Serializable {
             outputstream = new FileOutputStream(fd);
 			/*check if any of them are null*/
             if (inputstream == null || outputstream == null) {
+                Log.d("USB", "Inputstream or Outputstream null.\r\n");
                 return;
             }
             try {
@@ -348,6 +387,10 @@ public class InterfaceFT311 implements Serializable {
                 OpenAccessory(accessory);
                 SetConfigAfterPermission();
                 GlobalVariable.connectionType = 1;
+
+                if (connection_interface != null) {
+                    connection_interface.aoaAttached();
+                }
             } else {
                 synchronized (mUsbReceiver)
                 {

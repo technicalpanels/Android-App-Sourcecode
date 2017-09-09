@@ -66,7 +66,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,RR2F.RR2FHighLevelInterface,Serializable {
+public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,RR2F.RR2FHighLevelInterface,InterfaceFT311.ConnectionInterface,Serializable {
     Protocol protocol = new Protocol();
     static int connecttionType2 = 0;
     final DB myDb = new DB(this);
@@ -147,12 +147,22 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
     TextView debugText;
     int count=0;
 
+    private void DEBUG_PRINT(String tag, String fmt, Object... args)
+    {
+        Log.d(tag, String.format(fmt, args));
+    }
 
     final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             byte[] data = new byte[actualNumBytes[0]];
             System.arraycopy(readBuffer,0,data,0,actualNumBytes[0]);
+
+            String dbg_msg = String.format("RR2F_INPUT %d bytes : ", data.length);
+            for (int i=0; i<data.length; i++) {
+                dbg_msg += String.format("%x ", data[i]);
+            }
+            DEBUG_PRINT("RR2F_INPUT", dbg_msg);
 
             rr2f.dataInput(data);
         }
@@ -291,6 +301,7 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
 //
 //        } else {
         FT311 = new InterfaceFT311(this);
+        FT311.setConnectionInterface(this);
         readBuffer = new byte[4096];
         readBufferToChar = new char[4096];
         actualNumBytes = new int[1];
@@ -324,6 +335,8 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
 
         //int len = writeText.length()+1;
         //byte a[] = new byte[len];
+
+        DEBUG_PRINT("RR2F_TX", "Tx %d bytes :%s.\r\n ", writeText.length(), writeText);
 
         rr2f.write(writeText+"\r");
 
@@ -1012,23 +1025,19 @@ public void AnimaDoor(int i)
                             //  boolean check =
                             if ((GlobalVariable.connectionType != 1)) {
                                 FT311.ResumeConnection();
-                            }
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                public void run() {
-                                    rr2f.startPing();
-                                    if (GlobalVariable.SetFist == true) {
-                                        if ((GlobalVariable.VehicleNo != "") && (!(GlobalVariable.VehicleNo.contains("00000")))) {
+                            } else {
+                                rr2f.startPing();
+                                if (GlobalVariable.SetFist == true) {
+                                    if ((GlobalVariable.VehicleNo != "") && (!(GlobalVariable.VehicleNo.contains("00000")))) {
 
-                                            SendUART("SET:VEHN:" + GlobalVariable.VehicleNo + "");
-                                        } else {
-                                            SendUART("SET:VEHN:?");
-                                        }
+                                        SendUART("SET:VEHN:" + GlobalVariable.VehicleNo + "");
                                     } else {
                                         SendUART("SET:VEHN:?");
                                     }
+                                } else {
+                                    SendUART("SET:VEHN:?");
                                 }
-                            }, 3000);
+                            }
 
                         } catch (Exception a) {
                         }
@@ -2440,9 +2449,11 @@ public void pupupclassini()
      ************************************************************/
     @Override
     public void rr2fOutput(byte[] data) {
-
-        String msg = new String(data);
-        Log.d("debugRR2F",msg);
+        String dbg_msg = String.format("RR2F_OUTPUT %d bytes : ", data.length);
+        for (int i=0; i<data.length; i++) {
+            dbg_msg += String.format("%x ", data[i]);
+        }
+        DEBUG_PRINT("RR2F_OUTPUT", dbg_msg);
 
         FT311.SendData(data.length,data);
     }
@@ -2452,9 +2463,10 @@ public void pupupclassini()
      ************************************************************/
     @Override
     public void rr2fDataReceive(byte[] data) {
+        String dbg_msg = String.format("Rx %d bytes : %s.\r\n", data.length, new String(data));
+        DEBUG_PRINT("RR2F_RX", dbg_msg);
 
         ReceiveData(new String(data));
-
     }
 
     @Override
@@ -2496,4 +2508,34 @@ public void pupupclassini()
         return super.onOptionsItemSelected(item);
     }
     */
+
+    public void aoaAttached()
+    {
+        DEBUG_PRINT("USB", "AOA Attached.\r\n");
+
+        Handler hndl = new Handler();
+
+        hndl.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                rr2f.startPing();
+                if (GlobalVariable.SetFist == true) {
+                    if ((GlobalVariable.VehicleNo != "") && (!(GlobalVariable.VehicleNo.contains("00000")))) {
+
+                        SendUART("SET:VEHN:" + GlobalVariable.VehicleNo + "");
+                    } else {
+                        SendUART("SET:VEHN:?");
+                    }
+                } else {
+                    SendUART("SET:VEHN:?");
+                }
+            }
+        }, 500);
+
+    }
+
+    public void aoaDetached()
+    {
+
+    }
 }
