@@ -269,7 +269,7 @@ public class ConfigurePage extends Activity {
 
             dataSend = dataSend +"PASS:" + PasswordText.getText().toString()+";";
 
-            dataSend = dataSend + "RTB:" + rtb_info.toString() + ";";
+            dataSend = dataSend + "SET:RTB:" + rtb_info.toString() + ";";
     }
 
     private void dataSetEditText()

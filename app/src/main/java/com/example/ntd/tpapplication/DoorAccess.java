@@ -1931,7 +1931,7 @@ public void pupupclassini()
 
                 if(valus.contains("ACKP")) {
                     GlobalVariable.KeyNumber = Spitvalue(dataReadFile[GlobalVariable.CONFIG_FILE_KEY_INDEX].toString());
-                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_ACCELERATION_INDEX].toString());
+                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_RTB_INDEX].toString());
                 }
                 else if(valus.contains("NACK")) {
                     SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_KEY_INDEX].toString());
@@ -1939,6 +1939,19 @@ public void pupupclassini()
                 else{
                     setVariableGlobleG(6,valus.toString());
                 }
+                break;
+            case "RTB":
+                if(valus.contains("ACKP")) {
+                    GlobalVariable.RTBInfo = Spitvalue(dataReadFile[GlobalVariable.CONFIG_FILE_RTB_INDEX].toString());
+                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_ACCELERATION_INDEX].toString());
+                }
+                else if(valus.contains("NACK")) {
+                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_RTB_INDEX].toString());
+                }
+                else{
+                    setVariableGlobleG(6,valus.toString());
+                }
+
                 break;
             case "CREW" :
                 crewNOT(valus.toString());
@@ -1980,20 +1993,6 @@ public void pupupclassini()
                 }
                 break;
 
-            case "RTB":
-                if(valus.contains("ACKP")) {
-                    GlobalVariable.RTBInfo = Spitvalue(dataReadFile[GlobalVariable.CONFIG_FILE_RTB_INDEX].toString());
-                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_ACCELERATION_INDEX].toString());
-                }
-                else if(valus.contains("NACK")) {
-                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_KEY_INDEX].toString());
-                }
-                else{
-                    setVariableGlobleG(6,valus.toString());
-                }
-
-                break;
-
            default: ToastMessageShort("Error..Receive..Commamd ");
 
                 break;
@@ -2008,23 +2007,23 @@ public void pupupclassini()
 
 
         }
-        else if(mode==2)
+        else if(mode==GlobalVariable.CONFIG_FILE_VEHICLE_NUMNER_INDEX)
         {
           GlobalVariable.VehicleNo = valus.toUpperCase().toString();
             SendUART("SET:DISH:?");
         }
-        else if(mode==3)
+        else if(mode==GlobalVariable.CONFIG_FILE_DISTANCE_SHORT_INDEX)
         {
             GlobalVariable.Distance_s = valus.toString();
             SendUART("SET:DIME:?");
 
         }
-        else if(mode==4)
+        else if(mode==GlobalVariable.CONFIG_FILE_DISTANCE_MEDIUM_INDEX)
         {
             GlobalVariable.Distance_m = valus.toString();
             SendUART("SET:DILO:?");
         }
-        else if(mode==5)
+        else if(mode==GlobalVariable.CONFIG_FILE_DISTANCE_LONG_INDEX)
         {
             GlobalVariable.Distance_l = valus.toString();
             SendUART("SET:VKEY:?");
