@@ -65,6 +65,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,RR2F.RR2FHighLevelInterface,InterfaceFT311.ConnectionInterface,Serializable {
     Protocol protocol = new Protocol();
@@ -86,6 +88,11 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
     EditText edit_ack, edit_reply ,Pass_config;
     ImageButton btnLog, btnConfig, btnExpand;
     ImageView door1, door2, door3, door4, door5,door6, person1, person2, person3, engine;
+    ImageView imgCabLock;
+    ImageView imgVaultLock;
+    ImageView imgRearLock;
+    ImageView imgDrvLock;
+    ImageView imgPsgLock;
     RelativeLayout carLayout;
     LinearLayout layoutLogDisplay, layoutParentCar, layoutPassword;
     private CountDownTimer countDownTimer;
@@ -168,6 +175,16 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
         }
     };
 
+    private void setViewVisibility_CrossThread(final View view, final int visibility)
+    {
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                view.setVisibility(visibility);
+            }
+        });
+    }
+
     private void ConnectionTypeCheck(int type) {
         GlobalVariable.connectionType = type;
     }
@@ -216,6 +233,13 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
         }
         ShowTextState(1);
         current_instance=this;
+
+        setDoorLock(GlobalVariable.DOOR_LOCK_DRIVER, false);
+        setDoorLock(GlobalVariable.DOOR_LOCK_PASSENGER, false);
+        setDoorLock(GlobalVariable.DOOR_LOCK_SIDE, false);
+        setDoorLock(GlobalVariable.DOOR_LOCK_CAB, false);
+        setDoorLock(GlobalVariable.DOOR_LOCK_VAULT, false);
+        setDoorLock(GlobalVariable.DOOR_LOCK_REAR, false);
     }
 
     public void SendUartFromExtClass(String data){
@@ -420,6 +444,11 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
 
         engine = (ImageView) findViewById(R.id.engine);
 
+        imgCabLock = (ImageView)findViewById(R.id.imgCabLock);
+        imgVaultLock = (ImageView)findViewById(R.id.imgVaultLock);
+        imgRearLock = (ImageView)findViewById(R.id.imgRearLock);
+        imgDrvLock = (ImageView)findViewById(R.id.imgDrvLock);
+        imgPsgLock = (ImageView)findViewById(R.id.imgPsgLock);
     }
 
 public void AnimaDoor(int i)
@@ -1760,8 +1789,8 @@ public void pupupclassini()
 
                 if((valus.contains("ACKP")))
                 {
-                    GlobalVariable.Acceleration_l = Spitvalue(dataReadFile[6].toString());
-                    GlobalVariable.PassworkConfig = Spitvalue2(dataReadFile[7].toString());
+                    GlobalVariable.Acceleration_l = Spitvalue(dataReadFile[GlobalVariable.CONFIG_FILE_ACCELERATION_INDEX].toString());
+                    GlobalVariable.PassworkConfig = Spitvalue2(dataReadFile[GlobalVariable.CONFIG_FILE_PASSWORD_INDEX].toString());
                     GlobalVariable.ReadFileConfig = true;
                     GlobalVariable.SetFist = false;
 
@@ -1773,7 +1802,7 @@ public void pupupclassini()
                 {
                     if(GlobalVariable.Acceleration_l=="") {
 
-                        SendUART(dataReadFile[6].toString());
+                        SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_ACCELERATION_INDEX].toString());
                     }
                 }
                 else{
@@ -1790,8 +1819,8 @@ public void pupupclassini()
                     {
                         if(GlobalVariable.VehicleNo=="")
                         {
-                            GlobalVariable.VehicleNo = Spitvalue(dataReadFile[1].toString());
-                            SendUART(dataReadFile[2].toString());
+                            GlobalVariable.VehicleNo = Spitvalue(dataReadFile[GlobalVariable.CONFIG_FILE_VEHICLE_NUMNER_INDEX].toString());
+                            SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_DISTANCE_LONG_INDEX].toString());
                         }
                         else
                         {
@@ -1802,7 +1831,7 @@ public void pupupclassini()
                                 String Hex = EncryptionClass.StringToHex(GlobalVariable.VehicleNo.toString());
                                 buferD = EncryptionClass.decryptAES(Hex, buferR);
                                 dataReadFile = buferD.split(";");
-                                SendUART(dataReadFile[2].toString());
+                                SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_DISTANCE_LONG_INDEX].toString());
                             }
                             else
                             {
@@ -1817,7 +1846,7 @@ public void pupupclassini()
                             SendUART("SET:VEHN:" + GlobalVariable.VehicleNo + "");
                         }
                         else{
-                            SendUART(dataReadFile[1].toString());
+                            SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_ACCELERATION_INDEX].toString());
                         }
                     }
                 }
@@ -1842,7 +1871,7 @@ public void pupupclassini()
                             buferD = EncryptionClass.decryptAES(Hex, buferR);
                             dataReadFile = buferD.split(";");
 
-                            SendUART(dataReadFile[2].toString());
+                            SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_DISTANCE_LONG_INDEX].toString());
                         } else  //find No File
                         {
                             setVariableGlobleG(2,valus.toString());
@@ -1856,11 +1885,11 @@ public void pupupclassini()
 
                 if(valus.contains("ACKP")) {
                     GlobalVariable.Distance_s = Spitvalue(dataReadFile[4].toString());
-                    SendUART(dataReadFile[5].toString());
+                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_KEY_INDEX].toString());
                 }
                 else if(valus.contains("NACK"))
                 {
-                    SendUART(dataReadFile[4].toString());
+                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_DISTANCE_SHORT_INDEX].toString());
                 }
                 else
                 {
@@ -1872,11 +1901,11 @@ public void pupupclassini()
 
                 if(valus.contains("ACKP")) {
                     GlobalVariable.Distance_m = Spitvalue(dataReadFile[3].toString());
-                    SendUART(dataReadFile[4].toString());
+                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_DISTANCE_SHORT_INDEX].toString());
                 }
                 else if(valus.contains("NACK"))
                 {
-                    SendUART(dataReadFile[3].toString());
+                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_DISTANCE_MEDIUM_INDEX].toString());
                 }
                 else{
                     setVariableGlobleG(4,valus.toString());
@@ -1887,11 +1916,11 @@ public void pupupclassini()
 
                 if(valus.contains("ACKP")) {
                     GlobalVariable.Distance_l = Spitvalue(dataReadFile[2].toString());
-                    SendUART(dataReadFile[3].toString());
+                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_DISTANCE_MEDIUM_INDEX].toString());
                 }
                 else if(valus.contains("NACK"))
                 {
-                    SendUART(dataReadFile[2].toString());
+                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_DISTANCE_LONG_INDEX].toString());
                 }else
                 {
                     setVariableGlobleG(5,valus.toString());
@@ -1901,11 +1930,11 @@ public void pupupclassini()
             case "VKEY":
 
                 if(valus.contains("ACKP")) {
-                    GlobalVariable.KeyNumber = Spitvalue(dataReadFile[5].toString());
-                    SendUART(dataReadFile[6].toString());
+                    GlobalVariable.KeyNumber = Spitvalue(dataReadFile[GlobalVariable.CONFIG_FILE_KEY_INDEX].toString());
+                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_ACCELERATION_INDEX].toString());
                 }
                 else if(valus.contains("NACK")) {
-                    SendUART(dataReadFile[5].toString());
+                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_KEY_INDEX].toString());
                 }
                 else{
                     setVariableGlobleG(6,valus.toString());
@@ -1922,6 +1951,10 @@ public void pupupclassini()
                 break;
             case "CREWST":
                 crewOF(valus.toString());
+                break;
+
+            case "DOORLOCK":
+                setDoorLockHandler(valus);
                 break;
 
             case "DOOR":
@@ -1945,6 +1978,20 @@ public void pupupclassini()
                 }else if(valus.contains("INAC")){
                     setOdometer(false);
                 }
+                break;
+
+            case "RTB":
+                if(valus.contains("ACKP")) {
+                    GlobalVariable.RTBInfo = Spitvalue(dataReadFile[GlobalVariable.CONFIG_FILE_RTB_INDEX].toString());
+                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_ACCELERATION_INDEX].toString());
+                }
+                else if(valus.contains("NACK")) {
+                    SendUART(dataReadFile[GlobalVariable.CONFIG_FILE_KEY_INDEX].toString());
+                }
+                else{
+                    setVariableGlobleG(6,valus.toString());
+                }
+
                 break;
 
            default: ToastMessageShort("Error..Receive..Commamd ");
@@ -2082,6 +2129,18 @@ public void pupupclassini()
         SendUART("SET:CREW:ACK");
     }
 
+    private void setDoorLockHandler(String lock_str)
+    {
+        DoorLockInfo info = new DoorLockInfo(lock_str);
+
+        setDoorLock(GlobalVariable.DOOR_LOCK_DRIVER, info.getDriverDoorLocked());
+        setDoorLock(GlobalVariable.DOOR_LOCK_PASSENGER, info.getPassengerDoorLocked());
+        setDoorLock(GlobalVariable.DOOR_LOCK_SIDE, info.getSideDoorLocked());
+        setDoorLock(GlobalVariable.DOOR_LOCK_CAB, info.getCabinDoorLocked());
+        setDoorLock(GlobalVariable.DOOR_LOCK_VAULT, info.getVaultDoorLocked());
+        setDoorLock(GlobalVariable.DOOR_LOCK_REAR, info.getRearDoorLocked());
+    }
+
     private  void DoorOpen(String door)
     {
       String[] dataSpit =  Spitvalue3(door);
@@ -2157,6 +2216,30 @@ public void pupupclassini()
             AnimaDoor(15);
         }
 
+    }
+
+    private void setDoorLock(int target_door, boolean status)
+    {
+        switch (target_door) {
+            case GlobalVariable.DOOR_LOCK_DRIVER :
+                setViewVisibility_CrossThread(imgDrvLock, status ? View.VISIBLE : View.INVISIBLE);
+                break;
+            case GlobalVariable.DOOR_LOCK_PASSENGER :
+                setViewVisibility_CrossThread(imgPsgLock, status ? View.VISIBLE : View.INVISIBLE);
+                break;
+            case GlobalVariable.DOOR_LOCK_SIDE :
+                /* There are no lock on SideDoor. */
+                break;
+            case GlobalVariable.DOOR_LOCK_CAB :
+                setViewVisibility_CrossThread(imgCabLock, status ? View.VISIBLE : View.INVISIBLE);
+                break;
+            case GlobalVariable.DOOR_LOCK_VAULT :
+                setViewVisibility_CrossThread(imgVaultLock, status ? View.VISIBLE : View.INVISIBLE);
+                break;
+            case GlobalVariable.DOOR_LOCK_REAR :
+                setViewVisibility_CrossThread(imgRearLock, status ? View.VISIBLE : View.INVISIBLE);
+                break;
+        }
     }
 
     private void DooralarmAct(String data)

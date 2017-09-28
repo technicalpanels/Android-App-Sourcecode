@@ -23,6 +23,7 @@
     <string name="title_activity_test_uart">TestUART</string>
     <string name="title_activity_connection">ConnectionActivity</string>
     <string name="title_activity_configure_page">ConfigurePage</string>
+    <string name="title_activity_configure_rtb">RTB Configure</string>
     <string name="title_activity_test_pin">TestPin</string>
     <string name="str_input"><u>Input</u></string>
     <string name="str_output"><u>Output</u></string>
@@ -48,7 +49,6 @@
         <item>RTB6</item>>
         <item>SOS</item>>
     </string-array>
-
 
 
 </resources>

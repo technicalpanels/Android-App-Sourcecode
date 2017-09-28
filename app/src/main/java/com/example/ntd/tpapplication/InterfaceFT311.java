@@ -82,15 +82,18 @@ public class InterfaceFT311 implements Serializable {
             } else if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
                 Log.d("USB", "USB attached.\r\n");
                 is_attached = true;
+                MessageBox("ACTION_USB_DEVICE_ATTACHED");
+                //ResumeConnection();
             } else if (Intent.ACTION_POWER_CONNECTED.equals(action)) {
                 // ResumeConnection();
             } else if (UsbManager.ACTION_USB_ACCESSORY_DETACHED.equals(action)) {
                 Log.d("USB", "USB detached.\r\n");
-                is_attached = false;
-                System.exit(0);
-                GlobalVariable.connectionType = -1;
-                DestroyAccessory(true);
-                System.exit(0);
+                MessageBox("ACTION_USB_ACCESSORY_DETACHED");
+                //is_attached = false;
+                //System.exit(0);
+                //GlobalVariable.connectionType = -1;
+                //DestroyAccessory(true);
+                //System.exit(0);
             }
         }
     };

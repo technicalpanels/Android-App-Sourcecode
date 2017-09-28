@@ -1,6 +1,7 @@
 package com.example.ntd.tpapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -38,13 +39,15 @@ public class ConfigurePage extends Activity {
     ScrollView Scro;
  EditText  vehicle ;
  ToggleButton btn_Distance ;
-    Button btn_Cancel ,btn_save,btn_Upload;
+    Button btn_Cancel ,btn_save,btn_Upload,btn_RTBConfig;
 
     boolean CommandStatus =false;
     boolean CommandWork = false;
     String dataSend ="";
 
     private DoorAccess p_instance;
+
+    private RTBConfigureInfo rtb_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,8 @@ public class ConfigurePage extends Activity {
         dataSetEditText();
 
         p_instance=DoorAccess.current_instance;
+
+        rtb_info = new RTBConfigureInfo();
     }
     private void InitScroViwe()
     {
@@ -78,6 +83,7 @@ public class ConfigurePage extends Activity {
           btn_Cancel =(Button)findViewById(R.id.btn_cancel_config);
           btn_save = (Button) findViewById(R.id.btn_save_config);
         btn_Upload =(Button)findViewById(R.id.btn_uploadfm);
+        btn_RTBConfig = (Button)findViewById(R.id.btn_rtb_config);
 //        final Button btn_set0_position = (Button) findViewById(R.id.btn_set0_position);
 //        btn_set0_position.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -99,7 +105,7 @@ public class ConfigurePage extends Activity {
         btn_Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConfigurePage.this.finish();
+                finish();
             }
         });
 
@@ -134,17 +140,12 @@ public class ConfigurePage extends Activity {
                              } catch (InterruptedException e) {
                                  e.printStackTrace();
                              }
-                             Handler handlercon = new Handler();
-                             handlercon.postDelayed(new Runnable() {
-                                 public void run() {
 
-                                     if(checkfile())
-                                     {
-                                         Toast.makeText(ConfigurePage.this, "CheckFile...Ok", Toast.LENGTH_SHORT).show();
-                                         ConfigurePage.this.finish();
-                                     }
-                                 }
-                             }, 3000);
+                             if(checkfile())
+                             {
+                                 Toast.makeText(ConfigurePage.this, "CheckFile...Ok", Toast.LENGTH_SHORT).show();
+                                 ConfigurePage.this.finish();
+                             }
 
                              break;
 
@@ -190,12 +191,45 @@ public class ConfigurePage extends Activity {
             }
         });
 
+        btn_RTBConfig.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent rtb_configure_intent = new Intent(ConfigurePage.this, ConfigureRTB.class);
+
+                rtb_configure_intent.putExtra(GlobalVariable.RTB_INFO_EXTRA_PASSIN_NAME, rtb_info.toString());
+
+                startActivityForResult(rtb_configure_intent, 0);
+            }
+        });
+
 //        btn_save.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //
 //            }
 //        });
+    }
+
+    /* This function will be called when child Activity finished. */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String rtb_info_str;
+
+        Log.d("RTB", "finished");
+
+        if (data == null) {
+            Log.d("RTB", "data is null.");
+        }
+
+        if (resultCode == RESULT_OK) {
+            Log.d("RTB", "Result OK.");
+
+            rtb_info_str = data.getStringExtra(GlobalVariable.RTB_INFO_EXTRA_RETURN_NAME);
+
+            rtb_info.fromString(rtb_info_str);
+        } else {
+            Log.d("RTB", "Result fail.");
+        }
     }
 
     private  void initextbox()
@@ -234,6 +268,8 @@ public class ConfigurePage extends Activity {
            // dataSend = dataSend +"SET::ACC0:?;";
 
             dataSend = dataSend +"PASS:" + PasswordText.getText().toString()+";";
+
+            dataSend = dataSend + "RTB:" + rtb_info.toString() + ";";
     }
 
     private void dataSetEditText()
@@ -329,41 +365,48 @@ public class ConfigurePage extends Activity {
             buferD = EncryptionClass.decryptAES(Hex, datacheck);
             String[] dataReadFile = buferD.split(";");
 
-           if(!dataReadFile[1].toString().contains(vehicle.getText().toString()))
+           if(!dataReadFile[GlobalVariable.CONFIG_FILE_VEHICLE_NUMNER_INDEX].toString().contains(vehicle.getText().toString()))
             {
             Toast.makeText(ConfigurePage.this, "Error-vehicle", Toast.LENGTH_SHORT).show();
             return false  ;
             }
-            if(!(dataReadFile[2].toString().contains(Distance_Long.getText().toString())))
+            if(!(dataReadFile[GlobalVariable.CONFIG_FILE_DISTANCE_LONG_INDEX].toString().contains(Distance_Long.getText().toString())))
             {
                 Toast.makeText(ConfigurePage.this, "Error-Distance_Long", Toast.LENGTH_SHORT).show();
                 return false  ;
             }
-            if(!(dataReadFile[3].toString()).contains(Distance_Medium.getText().toString()))
+            if(!(dataReadFile[GlobalVariable.CONFIG_FILE_DISTANCE_MEDIUM_INDEX].toString()).contains(Distance_Medium.getText().toString()))
             {
                 Toast.makeText(ConfigurePage.this, "Error-Distance_Medium", Toast.LENGTH_SHORT).show();
                 return false  ;
             }
-            if(!(dataReadFile[4].toString()).contains(Distance_Shot.getText().toString()))
+            if(!(dataReadFile[GlobalVariable.CONFIG_FILE_DISTANCE_SHORT_INDEX].toString()).contains(Distance_Shot.getText().toString()))
             {
                 Toast.makeText(ConfigurePage.this, "Error-Distance_Shot", Toast.LENGTH_SHORT).show();
                 return false  ;
             }
-            if(!(dataReadFile[5].toString()).contains(KeyNumberT.getText().toString()))
+            if(!(dataReadFile[GlobalVariable.CONFIG_FILE_KEY_INDEX].toString()).contains(KeyNumberT.getText().toString()))
             {
                 Toast.makeText(ConfigurePage.this, "Error-KeyNumber", Toast.LENGTH_SHORT).show();
                 return false  ;
             }
-            if(!(dataReadFile[6].toString()).contains(Acceleration.getText().toString()))
+            if(!(dataReadFile[GlobalVariable.CONFIG_FILE_ACCELERATION_INDEX].toString()).contains(Acceleration.getText().toString()))
             {
                 Toast.makeText(ConfigurePage.this, "Error-Acceleration", Toast.LENGTH_SHORT).show();
                 return false  ;
             }
-            if(!(dataReadFile[7].toString()).contains(PasswordText.getText().toString()))
+            if(!(dataReadFile[GlobalVariable.CONFIG_FILE_PASSWORD_INDEX].toString()).contains(PasswordText.getText().toString()))
             {
                 Toast.makeText(ConfigurePage.this, "Error-Password", Toast.LENGTH_SHORT).show();
                 return false  ;
             }
+            if(!(dataReadFile[GlobalVariable.CONFIG_FILE_RTB_INDEX].toString()).contains(rtb_info.toString()))
+            {
+                Toast.makeText(ConfigurePage.this, "Error-RTB", Toast.LENGTH_SHORT).show();
+                return false  ;
+            }
+
+
         } else  //find No File
         {
             Toast.makeText(ConfigurePage.this, "File-Error"+vehicle.getText().toString(), Toast.LENGTH_SHORT).show();

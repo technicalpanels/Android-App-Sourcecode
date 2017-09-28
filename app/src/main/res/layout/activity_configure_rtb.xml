@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ntd.tpapplication.ConfigureRTB">
+
+    <ScrollView
+        android:id="@+id/frmMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarStyle="outsideInset"
+        android:isScrollContainer="true"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Setting view row1 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- Door sensor -->
+                        <TableLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="10dp">
+
+                            <!-- Title -->
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1">
+
+                                </Space>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Door sensor"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold">
+
+                                </TextView>
+
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1">
+
+                                </Space>
+
+                            </TableRow>
+
+                            <!-- Driver door -->
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Driver door : "
+                                    android:textSize="18dp"
+                                    android:textStyle="normal" />
+
+                                <ToggleButton
+                                    android:id="@+id/btnDriverDoorEnabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textOn="Enable"
+                                    android:textOff="Disable"/>
+
+                            </TableRow>
+
+                            <!-- Passenger door -->
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Passenger door : "
+                                    android:textSize="18dp"
+                                    android:textStyle="normal" />
+
+                                <ToggleButton
+                                    android:id="@+id/btnPassengerDoorEnabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textOn="Enable"
+                                    android:textOff="Disable"/>
+
+                            </TableRow>
+
+                            <!-- Side door -->
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Side door : "
+                                    android:textSize="18dp"
+                                    android:textStyle="normal" />
+
+                                <ToggleButton
+                                    android:id="@+id/btnSideDoorEnabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textOn="Enable"
+                                    android:textOff="Disable"/>
+
+                            </TableRow>
+
+                            <!-- Cabin door -->
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Cabin door : "
+                                    android:textSize="18dp"
+                                    android:textStyle="normal" />
+
+                                <ToggleButton
+                                    android:id="@+id/btnCabDoorEnabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textOn="Enable"
+                                    android:textOff="Disable"/>
+
+                            </TableRow>
+
+                            <!-- Vault door -->
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Vault door : "
+                                    android:textSize="18dp"
+                                    android:textStyle="normal" />
+
+                                <ToggleButton
+                                    android:id="@+id/btnVaultDoorEnabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textOn="Enable"
+                                    android:textOff="Disable"/>
+
+                            </TableRow>
+
+                            <!-- Rear door -->
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rear door : "
+                                    android:textSize="18dp"
+                                    android:textStyle="normal" />
+
+                                <ToggleButton
+                                    android:id="@+id/btnRearDoorEnabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textOn="Enable"
+                                    android:textOff="Disable"/>
+
+                            </TableRow>
+
+                        </TableLayout>
+
+                        <!-- Door lock sensor -->
+                        <TableLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="10dp">
+
+                            <!-- Title -->
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1">
+
+                                </Space>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Door lock sensor"
+                                    android:textSize="18dp"
+                                    android:textStyle="bold">
+
+                                </TextView>
+
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1">
+
+                                </Space>
+
+                            </TableRow>
+
+                            <!-- Driver door -->
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Driver door lock : "
+                                    android:textSize="18dp"
+                                    android:textStyle="normal" />
+
+                                <ToggleButton
+                                    android:id="@+id/btnDriverDoorLockEnabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textOn="Enable"
+                                    android:textOff="Disable"/>
+
+                            </TableRow>
+
+                            <!-- Passenger door -->
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Passenger door lock : "
+                                    android:textSize="18dp"
+                                    android:textStyle="normal" />
+
+                                <ToggleButton
+                                    android:id="@+id/btnPassengerDoorLockEnabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textOn="Enable"
+                                    android:textOff="Disable"/>
+
+                            </TableRow>
+
+                            <!-- Side door -->
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Side door lock : "
+                                    android:textSize="18dp"
+                                    android:textStyle="normal" />
+
+                                <ToggleButton
+                                    android:id="@+id/btnSideDoorLockEnabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textOn="Enable"
+                                    android:textOff="Disable"/>
+
+                            </TableRow>
+
+                            <!-- Cabin door -->
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Cabin door lock : "
+                                    android:textSize="18dp"
+                                    android:textStyle="normal" />
+
+                                <ToggleButton
+                                    android:id="@+id/btnCabDoorLockEnabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textOn="Enable"
+                                    android:textOff="Disable"/>
+
+                            </TableRow>
+
+                            <!-- Vault door -->
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Vault door lock : "
+                                    android:textSize="18dp"
+                                    android:textStyle="normal" />
+
+                                <ToggleButton
+                                    android:id="@+id/btnVaultDoorLockEnabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textOn="Enable"
+                                    android:textOff="Disable"/>
+
+                            </TableRow>
+
+                            <!-- Rear door -->
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rear door lock : "
+                                    android:textSize="18dp"
+                                    android:textStyle="normal" />
+
+                                <ToggleButton
+                                    android:id="@+id/btnRearDoorLockEnabled"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textOn="Enable"
+                                    android:textOff="Disable"/>
+
+                            </TableRow>
+
+                        </TableLayout>
+
+                    </LinearLayout>
+
+                    <!-- Setting view row2 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- Other sensor -->
+                        <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="10dp">
+
+                        <!-- Title -->
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                            </Space>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Other sensor"
+                                android:textSize="18dp"
+                                android:textStyle="bold">
+
+                            </TextView>
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                            </Space>
+
+                        </TableRow>
+
+                        <!-- Alarm net -->
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Alarm net : "
+                                android:textSize="18dp"
+                                android:textStyle="normal" />
+
+                            <ToggleButton
+                                android:id="@+id/btnAlarmNetEnabled"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textOn="Enable"
+                                android:textOff="Disable"/>
+
+                        </TableRow>
+
+                        <!-- Hatch -->
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hatch : "
+                                android:textSize="18dp"
+                                android:textStyle="normal" />
+
+                            <ToggleButton
+                                android:id="@+id/btnHatchEnabled"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textOn="Enable"
+                                android:textOff="Disable"/>
+
+                        </TableRow>
+
+                    </TableLayout>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <!-- Save/Exit button -->
+            <LinearLayout
+                android:id="@+id/frmButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/btnBack"
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
+                    android:text="Back"
+                    android:textSize="18sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
