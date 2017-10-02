@@ -1,8 +1,10 @@
 package com.example.ntd.tpapplication;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.usb.UsbDevice;
@@ -214,7 +216,7 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
         InitSharedPreferences();
         ConnectionTypeCheck(-1);
         // ConnectionOpen();
-        ConnectionUSB();
+        CreateUSBInterface();
         LogRefresh();
         ButtonColor(0);
         initIs();
@@ -240,6 +242,29 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
         setDoorLock(GlobalVariable.DOOR_LOCK_CAB, false);
         setDoorLock(GlobalVariable.DOOR_LOCK_VAULT, false);
         setDoorLock(GlobalVariable.DOOR_LOCK_REAR, false);
+
+        Handler hndl = new Handler();
+
+        hndl.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (DoorAccess.this.connect() == GlobalVariable.CONNECTION_FAIL_NO_DEVICE) {
+
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(DoorAccess.this);
+                    dlgAlert.setMessage("Cannot connect to Master-board. Please check the USB connection.");
+                    dlgAlert.setTitle("Error");
+                    dlgAlert.setCancelable(false);
+
+                    dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            System.exit(0);
+                        }
+                    });
+
+                    dlgAlert.create().show();
+                }
+            }
+        }, 1000);
     }
 
     public void SendUartFromExtClass(String data){
@@ -265,15 +290,19 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == 1) {
-            if (resultCode == Activity.RESULT_OK) {
-                try {
-                    String result = data.getStringExtra("result");
-                    //    SendUART(result);
-                } catch (Exception e) {
-                    Log.d("Exception", e.getMessage());
-                }
+        if (requestCode == GlobalVariable.CONFIGURE_PAGE_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+
+                Handler hndl = new Handler();
+
+                hndl.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        DoorAccess.this.connect();
+                    }
+                }, 500);
             }
+
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
             }
@@ -306,7 +335,7 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
 //        }
 //    }
 
-    public void ConnectionUSB() {
+    public void CreateUSBInterface() {
       //  baudRate = 9600;
         baudRate = 115200;
         stopBit = 1;
@@ -326,6 +355,7 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
 //        } else {
         FT311 = new InterfaceFT311(this);
         FT311.setConnectionInterface(this);
+        Log.d("FTDI", "Create new InterfaceFT311");
         readBuffer = new byte[4096];
         readBufferToChar = new char[4096];
         actualNumBytes = new int[1];
@@ -333,6 +363,34 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
 //        handlerThread = new handler_thread(handler);
 //        handlerThread.start();
 
+    }
+
+    private int connect()
+    {
+        try {
+            //  boolean check =
+            if ((GlobalVariable.connectionType != 1)) {
+                if (FT311.ResumeConnection() == false) {
+                    return GlobalVariable.CONNECTION_FAIL_NO_DEVICE;
+                }
+            } else {
+                rr2f.startPing();
+                if (GlobalVariable.SetFist == true) {
+                    if ((GlobalVariable.VehicleNo != "") && (!(GlobalVariable.VehicleNo.contains("00000")))) {
+
+                        SendUART("SET:VEHN:" + GlobalVariable.VehicleNo + "");
+                    } else {
+                        SendUART("SET:VEHN:?");
+                    }
+                } else {
+                    SendUART("SET:VEHN:?");
+                }
+            }
+
+            return GlobalVariable.CONNECTION_SUCCESS;
+        } catch (Exception a) {
+            return GlobalVariable.CONNECTION_FAIL_UNKNOWN;
+        }
     }
 /*
     public void SendUART(String writeText) {
@@ -651,7 +709,7 @@ public void AnimaDoor(int i)
 
                     boolean check = FT311.ResumeConnection();
                     if (!check) {
-                        ConnectionUSB();
+                        //ConnectionUSB();
                     }
                     //  FT311.SetConfig(baudRate, dataBit, stopBit, parity, flowControl);
                 } catch (Exception a) {
@@ -1050,26 +1108,7 @@ public void AnimaDoor(int i)
                 }
                 switch (item.getItemId()) {
                     case R.id.menu_usb:
-                        try {
-                            //  boolean check =
-                            if ((GlobalVariable.connectionType != 1)) {
-                                FT311.ResumeConnection();
-                            } else {
-                                rr2f.startPing();
-                                if (GlobalVariable.SetFist == true) {
-                                    if ((GlobalVariable.VehicleNo != "") && (!(GlobalVariable.VehicleNo.contains("00000")))) {
-
-                                        SendUART("SET:VEHN:" + GlobalVariable.VehicleNo + "");
-                                    } else {
-                                        SendUART("SET:VEHN:?");
-                                    }
-                                } else {
-                                    SendUART("SET:VEHN:?");
-                                }
-                            }
-
-                        } catch (Exception a) {
-                        }
+                        connect();
                         break;
                     case R.id.menu_wifi:
 
@@ -1794,7 +1833,14 @@ public void pupupclassini()
                     GlobalVariable.ReadFileConfig = true;
                     GlobalVariable.SetFist = false;
 
+                    /* Ask mode. */
                     SendUART("MODE:?");
+
+                    /* Ask door status. */
+                    SendUART("SET:DOOR:?");
+
+                    /* Ask door-lock status. */
+                    SendUART("SET:DOORLOCK:?");
 
                     ToastMessageShort("Success..setup");
                 }
@@ -2389,7 +2435,8 @@ public void pupupclassini()
             editor.commit();
             GlobalVariable.runProgramFirst = true;
             GlobalVariable.FTDIGlob = FT311;
-            DoorAccess.this.startActivity(myIntent);
+
+            startActivityForResult(myIntent, GlobalVariable.CONFIGURE_PAGE_ACTIVITY_REQUEST_CODE);
 
 
         } catch (Exception e) {
@@ -2611,6 +2658,8 @@ public void pupupclassini()
                 } else {
                     SendUART("SET:VEHN:?");
                 }
+
+
             }
         }, 500);
 

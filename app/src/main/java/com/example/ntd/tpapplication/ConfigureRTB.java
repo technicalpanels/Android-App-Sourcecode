@@ -1,5 +1,6 @@
 package com.example.ntd.tpapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ToggleButton;
 
-public class ConfigureRTB extends AppCompatActivity {
+public class ConfigureRTB extends Activity {
 
     /******************** View object ********************/
     private Button btnBack;
@@ -65,7 +66,7 @@ public class ConfigureRTB extends AppCompatActivity {
 
                 Intent ret = new Intent();
 
-                ret.putExtra(GlobalVariable.RTB_INFO_EXTRA_RETURN_NAME, rtb_info.toString());
+                ret.putExtra(GlobalVariable.RTB_CONFIG_ACTIVITY_EXTRA_RETURN_NAME, rtb_info.toString());
 
                 setResult(RESULT_OK, ret);
 
@@ -82,6 +83,16 @@ public class ConfigureRTB extends AppCompatActivity {
         rtb_info.setCabinDoorEnabled(btnCabDoorEnabled.isChecked());
         rtb_info.setVaultDoorEnabled(btnVaultDoorEnabled.isChecked());
         rtb_info.setRearDoorEnabled(btnRearDoorEnabled.isChecked());
+
+        rtb_info.setDriverDoorLockEnabled(btnDriverDoorLockEnabled.isChecked());
+        rtb_info.setPassengerDoorLockEnabled(btnPassengerDoorLockEnabled.isChecked());
+        rtb_info.setSideDoorLockEnabled(btnSideDoorLockEnabled.isChecked());
+        rtb_info.setCabinDoorLockEnabled(btnCabDoorLockEnabled.isChecked());
+        rtb_info.setVaultDoorLockEnabled(btnVaultDoorLockEnabled.isChecked());
+        rtb_info.setRearDoorLockEnabled(btnRearDoorLockEnabled.isChecked());
+
+        rtb_info.setAlarmNetEnabled(btnAlarmNetEnabled.isChecked());
+        rtb_info.setHatchEnabled(btnHatchEnabled.isChecked());
     }
 
     private void setAllViewFollowingInfo()
@@ -92,6 +103,16 @@ public class ConfigureRTB extends AppCompatActivity {
         btnCabDoorEnabled.setChecked(rtb_info.getCabinDoorEnabled());
         btnVaultDoorEnabled.setChecked(rtb_info.getVaultDoorEnabled());
         btnRearDoorEnabled.setChecked(rtb_info.getRearDoorEnabled());
+
+        btnDriverDoorLockEnabled.setChecked(rtb_info.getDriverDoorLockEnabled());
+        btnPassengerDoorLockEnabled.setChecked(rtb_info.getPassengerDoorLockEnabled());
+        btnSideDoorLockEnabled.setChecked(rtb_info.getSideDoorLockEnabled());
+        btnCabDoorLockEnabled.setChecked(rtb_info.getCabinDoorLockEnabled());
+        btnVaultDoorLockEnabled.setChecked(rtb_info.getVaultDoorLockEnabled());
+        btnRearDoorLockEnabled.setChecked(rtb_info.getRearDoorLockEnabled());
+
+        btnAlarmNetEnabled.setChecked(rtb_info.getAlarmNetEnabled());
+        btnHatchEnabled.setChecked(rtb_info.getHatchEnabled());
     }
 
     @Override
@@ -99,7 +120,7 @@ public class ConfigureRTB extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configure_rtb);
 
-        rtb_info_str = getIntent().getStringExtra(GlobalVariable.RTB_INFO_EXTRA_PASSIN_NAME);
+        rtb_info_str = getIntent().getStringExtra(GlobalVariable.RTB_CONFIG_ACTIVITY_EXTRA_PASSIN_NAME);
 
         rtb_info = new RTBConfigureInfo();
 

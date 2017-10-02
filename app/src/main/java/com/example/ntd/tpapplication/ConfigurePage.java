@@ -52,6 +52,7 @@ public class ConfigurePage extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        rtb_info = new RTBConfigureInfo();
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -68,8 +69,6 @@ public class ConfigurePage extends Activity {
         dataSetEditText();
 
         p_instance=DoorAccess.current_instance;
-
-        rtb_info = new RTBConfigureInfo();
     }
     private void InitScroViwe()
     {
@@ -105,6 +104,7 @@ public class ConfigurePage extends Activity {
         btn_Cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setResult(RESULT_CANCELED);
                 finish();
             }
         });
@@ -144,6 +144,8 @@ public class ConfigurePage extends Activity {
                              if(checkfile())
                              {
                                  Toast.makeText(ConfigurePage.this, "CheckFile...Ok", Toast.LENGTH_SHORT).show();
+
+                                 setResult(RESULT_OK);
                                  ConfigurePage.this.finish();
                              }
 
@@ -196,9 +198,9 @@ public class ConfigurePage extends Activity {
             public void onClick(View view) {
                 Intent rtb_configure_intent = new Intent(ConfigurePage.this, ConfigureRTB.class);
 
-                rtb_configure_intent.putExtra(GlobalVariable.RTB_INFO_EXTRA_PASSIN_NAME, rtb_info.toString());
+                rtb_configure_intent.putExtra(GlobalVariable.RTB_CONFIG_ACTIVITY_EXTRA_PASSIN_NAME, rtb_info.toString());
 
-                startActivityForResult(rtb_configure_intent, 0);
+                startActivityForResult(rtb_configure_intent, GlobalVariable.RTB_CONFIG_ACTIVITY_REQUEST_CODE);
             }
         });
 
@@ -215,20 +217,16 @@ public class ConfigurePage extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         String rtb_info_str;
 
-        Log.d("RTB", "finished");
+        if (requestCode == GlobalVariable.RTB_CONFIG_ACTIVITY_REQUEST_CODE) {
+            Log.d("RTB", "finished");
 
-        if (data == null) {
-            Log.d("RTB", "data is null.");
-        }
-
-        if (resultCode == RESULT_OK) {
-            Log.d("RTB", "Result OK.");
-
-            rtb_info_str = data.getStringExtra(GlobalVariable.RTB_INFO_EXTRA_RETURN_NAME);
-
-            rtb_info.fromString(rtb_info_str);
-        } else {
-            Log.d("RTB", "Result fail.");
+            if ((resultCode == RESULT_OK) && (data != null)) {
+                Log.d("RTB", "Result OK.");
+                rtb_info_str = data.getStringExtra(GlobalVariable.RTB_CONFIG_ACTIVITY_EXTRA_RETURN_NAME);
+                rtb_info.fromString(rtb_info_str);
+            } else {
+                Log.d("RTB", "Result fail.");
+            }
         }
     }
 
@@ -282,7 +280,7 @@ public class ConfigurePage extends Activity {
         Acceleration.setText(GlobalVariable.Acceleration_l);
         PasswordText.setText(GlobalVariable.PassworkConfig);
 
-
+        rtb_info.fromString(GlobalVariable.RTBInfo);
     }
     private void writeToFile(String DataSave) {
         try {

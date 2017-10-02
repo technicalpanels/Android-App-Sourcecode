@@ -21,8 +21,18 @@ public class GlobalVariable
     final public static int DOOR_LOCK_VAULT = 4;
     final public static int DOOR_LOCK_REAR = 5;
 
-    final public static String RTB_INFO_EXTRA_PASSIN_NAME = "RTB_INFO_EXTRA_PASSIN";
-    final public static String RTB_INFO_EXTRA_RETURN_NAME = "RTB_INFO_EXTRA_RETURN";
+    final public static String RTB_CONFIG_ACTIVITY_EXTRA_PASSIN_NAME = "RTB_CONFIG_ACTIVITY_EXTRA_PASSIN";
+    final public static String RTB_CONFIG_ACTIVITY_EXTRA_RETURN_NAME = "RTB_CONFIG_ACTIVITY_EXTRA_RETURN";
+
+
+    /* Activity request code. */
+    final public static int RTB_CONFIG_ACTIVITY_REQUEST_CODE = 100000;
+    final public static int CONFIGURE_PAGE_ACTIVITY_REQUEST_CODE = 100001;
+
+    final public static int CONNECTION_SUCCESS = 0;
+    final public static int CONNECTION_FAIL_NO_DEVICE = -1;
+    final public static int CONNECTION_FAIL_UNKNOWN = -100;
+
 
     public static int connectionType;
     public static boolean runProgramFirst=false;
@@ -43,7 +53,6 @@ public class GlobalVariable
     public static String  KeyNumber ="0" ;
     public static String  Acceleration_l ="0";
     public static String  PassworkConfig ="1234" ;
-
     public static String  RTBInfo = "0,0,0,0,0,0,0,0,0,0,0,0";
 
 //public static String IV="00000000";

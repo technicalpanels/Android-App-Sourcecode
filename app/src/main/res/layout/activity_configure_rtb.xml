@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ntd.tpapplication.ConfigureRTB">
+    tools:context="com.example.ntd.tpapplication.ConfigureRTB"
+    android:background="#000000">
 
     <ScrollView
         android:id="@+id/frmMain"
@@ -42,36 +43,28 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:padding="10dp">
+                            android:padding="10dp"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/circleg">
 
                             <!-- Title -->
                             <TableRow
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <Space
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1">
-
-                                </Space>
+                                android:orientation="horizontal"
+                                android:gravity="center">
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Door sensor"
                                     android:textSize="18dp"
-                                    android:textStyle="bold">
+                                    android:textStyle="bold"
+                                    android:textColor="@color/header_color"
+                                    android:gravity="center">
 
                                 </TextView>
 
-                                <Space
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1">
-
-                                </Space>
 
                             </TableRow>
 
@@ -86,14 +79,16 @@
                                     android:layout_height="wrap_content"
                                     android:text="Driver door : "
                                     android:textSize="18dp"
-                                    android:textStyle="normal" />
+                                    android:textStyle="normal"
+                                    android:textColor="@color/topic_color"/>
 
                                 <ToggleButton
                                     android:id="@+id/btnDriverDoorEnabled"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textOn="Enable"
-                                    android:textOff="Disable"/>
+                                    android:checked="false"
+                                    android:textOff="Disable"
+                                    android:textOn="Enable" />
 
                             </TableRow>
 
@@ -108,7 +103,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="Passenger door : "
                                     android:textSize="18dp"
-                                    android:textStyle="normal" />
+                                    android:textStyle="normal"
+                                    android:textColor="@color/topic_color"/>
 
                                 <ToggleButton
                                     android:id="@+id/btnPassengerDoorEnabled"
@@ -130,7 +126,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="Side door : "
                                     android:textSize="18dp"
-                                    android:textStyle="normal" />
+                                    android:textStyle="normal"
+                                    android:textColor="@color/topic_color"/>
 
                                 <ToggleButton
                                     android:id="@+id/btnSideDoorEnabled"
@@ -152,7 +149,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="Cabin door : "
                                     android:textSize="18dp"
-                                    android:textStyle="normal" />
+                                    android:textStyle="normal"
+                                    android:textColor="@color/topic_color"/>
 
                                 <ToggleButton
                                     android:id="@+id/btnCabDoorEnabled"
@@ -174,7 +172,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="Vault door : "
                                     android:textSize="18dp"
-                                    android:textStyle="normal" />
+                                    android:textStyle="normal"
+                                    android:textColor="@color/topic_color"/>
 
                                 <ToggleButton
                                     android:id="@+id/btnVaultDoorEnabled"
@@ -196,7 +195,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="Rear door : "
                                     android:textSize="18dp"
-                                    android:textStyle="normal" />
+                                    android:textStyle="normal"
+                                    android:textColor="@color/topic_color"/>
 
                                 <ToggleButton
                                     android:id="@+id/btnRearDoorEnabled"
@@ -214,36 +214,28 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:padding="10dp">
+                            android:padding="10dp"
+                            android:layout_margin="5dp"
+                            android:background="@drawable/circleg">
 
                             <!-- Title -->
                             <TableRow
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <Space
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1">
-
-                                </Space>
+                                android:orientation="horizontal"
+                                android:gravity="center">
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Door lock sensor"
                                     android:textSize="18dp"
-                                    android:textStyle="bold">
+                                    android:textStyle="bold"
+                                    android:textColor="@color/header_color"
+                                    android:gravity="center">
 
                                 </TextView>
 
-                                <Space
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1">
-
-                                </Space>
 
                             </TableRow>
 
@@ -258,7 +250,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="Driver door lock : "
                                     android:textSize="18dp"
-                                    android:textStyle="normal" />
+                                    android:textStyle="normal"
+                                    android:textColor="@color/topic_color"/>
 
                                 <ToggleButton
                                     android:id="@+id/btnDriverDoorLockEnabled"
@@ -280,7 +273,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="Passenger door lock : "
                                     android:textSize="18dp"
-                                    android:textStyle="normal" />
+                                    android:textStyle="normal"
+                                    android:textColor="@color/topic_color"/>
 
                                 <ToggleButton
                                     android:id="@+id/btnPassengerDoorLockEnabled"
@@ -302,7 +296,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="Side door lock : "
                                     android:textSize="18dp"
-                                    android:textStyle="normal" />
+                                    android:textStyle="normal"
+                                    android:textColor="@color/topic_color"/>
 
                                 <ToggleButton
                                     android:id="@+id/btnSideDoorLockEnabled"
@@ -324,7 +319,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="Cabin door lock : "
                                     android:textSize="18dp"
-                                    android:textStyle="normal" />
+                                    android:textStyle="normal"
+                                    android:textColor="@color/topic_color"/>
 
                                 <ToggleButton
                                     android:id="@+id/btnCabDoorLockEnabled"
@@ -346,7 +342,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="Vault door lock : "
                                     android:textSize="18dp"
-                                    android:textStyle="normal" />
+                                    android:textStyle="normal"
+                                    android:textColor="@color/topic_color"/>
 
                                 <ToggleButton
                                     android:id="@+id/btnVaultDoorLockEnabled"
@@ -368,7 +365,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="Rear door lock : "
                                     android:textSize="18dp"
-                                    android:textStyle="normal" />
+                                    android:textStyle="normal"
+                                    android:textColor="@color/topic_color"/>
 
                                 <ToggleButton
                                     android:id="@+id/btnRearDoorLockEnabled"
@@ -383,47 +381,32 @@
 
                     </LinearLayout>
 
-                    <!-- Setting view row2 -->
-                    <LinearLayout
+                    <!-- Other sensor -->
+                    <TableLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <!-- Other sensor -->
-                        <TableLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="10dp">
+                        android:padding="10dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/circleg">
 
                         <!-- Title -->
                         <TableRow
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <Space
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1">
-
-                            </Space>
+                            android:orientation="horizontal"
+                            android:gravity="center">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Other sensor"
                                 android:textSize="18dp"
-                                android:textStyle="bold">
+                                android:textStyle="bold"
+                                android:textColor="@color/header_color"
+                                android:gravity="center">
 
                             </TextView>
 
-                            <Space
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1">
-
-                            </Space>
 
                         </TableRow>
 
@@ -438,7 +421,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="Alarm net : "
                                 android:textSize="18dp"
-                                android:textStyle="normal" />
+                                android:textStyle="normal"
+                                android:textColor="@color/topic_color"/>
 
                             <ToggleButton
                                 android:id="@+id/btnAlarmNetEnabled"
@@ -460,7 +444,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="Hatch : "
                                 android:textSize="18dp"
-                                android:textStyle="normal" />
+                                android:textStyle="normal"
+                                android:textColor="@color/topic_color"/>
 
                             <ToggleButton
                                 android:id="@+id/btnHatchEnabled"
@@ -472,13 +457,6 @@
                         </TableRow>
 
                     </TableLayout>
-
-                        <Space
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
-
-                    </LinearLayout>
 
                 </LinearLayout>
 

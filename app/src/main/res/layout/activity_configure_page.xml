@@ -7,15 +7,17 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.example.ntd.tpapplication.ConfigurePage" >
+
     <TextView
         android:id="@+id/text_header"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
-        android:textSize="60dp" android:text="Config"
         android:layout_alignParentTop="true"
-        android:gravity="center_vertical|center_horizontal"
         android:background="@drawable/circleg"
-        android:textColor="#ffffff" />
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Config"
+        android:textColor="#ffffff"
+        android:textSize="60dp" />
 <ScrollView
     android:layout_width="fill_parent"
     android:layout_height="1000dp"
@@ -90,23 +92,23 @@
                 android:layout_marginLeft="20dp" />
 
             <ToggleButton
+                android:id="@+id/btn_set_Start_Stop"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:text="New ToggleButton"
-                android:id="@+id/btn_set_Start_Stop"
-                android:layout_alignTop="@+id/textView6"
-                android:layout_alignRight="@+id/edit_short_distance"
+                android:layout_above="@+id/textView13"
                 android:layout_alignEnd="@+id/edit_short_distance"
                 android:layout_alignLeft="@+id/edit_short_distance"
+                android:layout_alignRight="@+id/edit_short_distance"
                 android:layout_alignStart="@+id/edit_short_distance"
-                android:layout_above="@+id/textView13"
+                android:layout_alignTop="@+id/textView6"
+                android:layout_weight="0.31"
                 android:checked="false"
 
 
+                android:gravity="center_vertical|center_horizontal|center"
+                android:text="New ToggleButton"
                 android:textOff="STOP"
-                android:textOn="START"
-                android:gravity="center_vertical|center|center_horizontal"
-                android:layout_weight="0.31" />
+                android:textOn="START" />
         </LinearLayout>
 
         <LinearLayout
