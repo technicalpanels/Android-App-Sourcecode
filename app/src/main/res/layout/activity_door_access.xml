@@ -265,7 +265,7 @@
 
                         <ImageView
                             android:id="@+id/imgCabLock"
-                            android:visibility="visible"
+                            android:visibility="invisible"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_alignParentTop="true"
@@ -278,7 +278,7 @@
 
                         <ImageView
                             android:id="@+id/imgVaultLock"
-                            android:visibility="visible"
+                            android:visibility="invisible"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_alignParentTop="true"
@@ -291,7 +291,7 @@
 
                         <ImageView
                             android:id="@+id/imgRearLock"
-                            android:visibility="visible"
+                            android:visibility="invisible"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_alignParentTop="true"
@@ -304,7 +304,7 @@
 
                         <ImageView
                             android:id="@+id/imgDrvLock"
-                            android:visibility="visible"
+                            android:visibility="invisible"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_alignParentTop="true"
@@ -317,6 +317,7 @@
 
                         <ImageView
                             android:id="@+id/imgPsgLock"
+                            android:visibility="invisible"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_alignParentBottom="false"
@@ -325,8 +326,7 @@
                             android:layout_alignParentTop="true"
                             android:layout_marginLeft="330dp"
                             android:layout_marginTop="225dp"
-                            android:src="@drawable/lock_icon"
-                            android:visibility="visible" />
+                            android:src="@drawable/lock_icon"/>
 
                     </RelativeLayout>
 

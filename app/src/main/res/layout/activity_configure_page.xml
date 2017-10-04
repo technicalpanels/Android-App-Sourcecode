@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:columnCount="1"
-        android:rowCount="8"
+        android:rowCount="9"
         android:background="@drawable/circleg"
          >
 
@@ -484,18 +484,24 @@
                 android:layout_marginLeft="20dp"/>
 
             <Button
+                android:id="@+id/btn_rtb_config"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="RTB Config"
-                android:id="@+id/btn_rtb_config"
-                android:textColor="#ff4654FF"
-                android:textSize="25dp"
                 android:layout_alignTop="@+id/btn_save_config"
-                android:layout_toRightOf="@+id/textView7"
+                android:layout_marginLeft="20dp"
                 android:layout_toEndOf="@+id/textView7"
-                android:layout_marginLeft="20dp"/>
+                android:layout_toRightOf="@+id/textView7"
+                android:text="RTB Configure"
+                android:textColor="#ff4654FF"
+                android:textSize="25dp" />
 
         </LinearLayout>
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_version" />
     </GridLayout>
 </ScrollView>
 

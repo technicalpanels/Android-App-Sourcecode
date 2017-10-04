@@ -478,7 +478,7 @@
                     android:id="@+id/btnBack"
                     android:layout_width="150dp"
                     android:layout_height="80dp"
-                    android:text="Back"
+                    android:text="Apply"
                     android:textSize="18sp" />
 
                 <Space
