@@ -7,7 +7,7 @@
         android:toXDelta="0%" />
     <translate
         android:duration="1000"
-        android:fromYDelta="1.2%"
+        android:fromYDelta="-1.2%"
         android:startOffset="0"
         android:toYDelta="0%" />
 </set>

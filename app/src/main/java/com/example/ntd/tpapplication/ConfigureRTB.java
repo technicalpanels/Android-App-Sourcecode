@@ -18,14 +18,12 @@ public class ConfigureRTB extends Activity {
     private ToggleButton btnSideDoorEnabled;
     private ToggleButton btnCabDoorEnabled;
     private ToggleButton btnVaultDoorEnabled;
-    private ToggleButton btnRearDoorEnabled;
 
     private ToggleButton btnDriverDoorLockEnabled;
     private ToggleButton btnPassengerDoorLockEnabled;
     private ToggleButton btnSideDoorLockEnabled;
     private ToggleButton btnCabDoorLockEnabled;
     private ToggleButton btnVaultDoorLockEnabled;
-    private ToggleButton btnRearDoorLockEnabled;
 
     private ToggleButton btnAlarmNetEnabled;
     private ToggleButton btnHatchEnabled;
@@ -44,14 +42,12 @@ public class ConfigureRTB extends Activity {
         btnSideDoorEnabled = (ToggleButton)findViewById(R.id.btnSideDoorEnabled);
         btnCabDoorEnabled = (ToggleButton)findViewById(R.id.btnCabDoorEnabled);
         btnVaultDoorEnabled = (ToggleButton)findViewById(R.id.btnVaultDoorEnabled);
-        btnRearDoorEnabled = (ToggleButton)findViewById(R.id.btnRearDoorEnabled);
 
         btnDriverDoorLockEnabled = (ToggleButton)findViewById(R.id.btnDriverDoorLockEnabled);
         btnPassengerDoorLockEnabled = (ToggleButton)findViewById(R.id.btnPassengerDoorLockEnabled);
         btnSideDoorLockEnabled = (ToggleButton)findViewById(R.id.btnSideDoorLockEnabled);
         btnCabDoorLockEnabled = (ToggleButton)findViewById(R.id.btnCabDoorLockEnabled);
         btnVaultDoorLockEnabled = (ToggleButton)findViewById(R.id.btnVaultDoorLockEnabled);
-        btnRearDoorLockEnabled = (ToggleButton)findViewById(R.id.btnRearDoorLockEnabled);
 
         btnAlarmNetEnabled = (ToggleButton)findViewById(R.id.btnAlarmNetEnabled);
         btnHatchEnabled = (ToggleButton)findViewById(R.id.btnHatchEnabled);
@@ -82,14 +78,12 @@ public class ConfigureRTB extends Activity {
         rtb_info.setSideDoorEnabled(btnSideDoorEnabled.isChecked());
         rtb_info.setCabinDoorEnabled(btnCabDoorEnabled.isChecked());
         rtb_info.setVaultDoorEnabled(btnVaultDoorEnabled.isChecked());
-        rtb_info.setRearDoorEnabled(btnRearDoorEnabled.isChecked());
 
         rtb_info.setDriverDoorLockEnabled(btnDriverDoorLockEnabled.isChecked());
         rtb_info.setPassengerDoorLockEnabled(btnPassengerDoorLockEnabled.isChecked());
         rtb_info.setSideDoorLockEnabled(btnSideDoorLockEnabled.isChecked());
         rtb_info.setCabinDoorLockEnabled(btnCabDoorLockEnabled.isChecked());
         rtb_info.setVaultDoorLockEnabled(btnVaultDoorLockEnabled.isChecked());
-        rtb_info.setRearDoorLockEnabled(btnRearDoorLockEnabled.isChecked());
 
         rtb_info.setAlarmNetEnabled(btnAlarmNetEnabled.isChecked());
         rtb_info.setHatchEnabled(btnHatchEnabled.isChecked());
@@ -102,14 +96,12 @@ public class ConfigureRTB extends Activity {
         btnSideDoorEnabled.setChecked(rtb_info.getSideDoorEnabled());
         btnCabDoorEnabled.setChecked(rtb_info.getCabinDoorEnabled());
         btnVaultDoorEnabled.setChecked(rtb_info.getVaultDoorEnabled());
-        btnRearDoorEnabled.setChecked(rtb_info.getRearDoorEnabled());
 
         btnDriverDoorLockEnabled.setChecked(rtb_info.getDriverDoorLockEnabled());
         btnPassengerDoorLockEnabled.setChecked(rtb_info.getPassengerDoorLockEnabled());
         btnSideDoorLockEnabled.setChecked(rtb_info.getSideDoorLockEnabled());
         btnCabDoorLockEnabled.setChecked(rtb_info.getCabinDoorLockEnabled());
         btnVaultDoorLockEnabled.setChecked(rtb_info.getVaultDoorLockEnabled());
-        btnRearDoorLockEnabled.setChecked(rtb_info.getRearDoorLockEnabled());
 
         btnAlarmNetEnabled.setChecked(rtb_info.getAlarmNetEnabled());
         btnHatchEnabled.setChecked(rtb_info.getHatchEnabled());

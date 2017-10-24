@@ -89,10 +89,9 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
     Button butDison,butDisoff;
     EditText edit_ack, edit_reply ,Pass_config;
     ImageButton btnLog, btnConfig, btnExpand;
-    ImageView door1, door2, door3, door4, door5,door6, person1, person2, person3, engine;
+    ImageView door1, door2, door3, door4, door5, person1, person2, person3, engine;
     ImageView imgCabLock;
     ImageView imgVaultLock;
-    ImageView imgRearLock;
     ImageView imgDrvLock;
     ImageView imgPsgLock;
     RelativeLayout carLayout;
@@ -101,7 +100,7 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
     TextView countDownTime;
     Thread readThread;
     boolean isShowLog;
-    Animation door1O, door1C, door2O, door2C, door3O, door3C, door4C, door4O, door5O, door5C,door6O, door6C,brilnk;
+    Animation door1O, door1C, door2O, door2C, door3O, door3C, door4C, door4O, door5O, door5C,brilnk;
     int baudRate; /* baud rate */
     byte stopBit; /* 1:1stop bits, 2:2 stop bits */
     byte dataBit; /* 8:8bit, 7: 7bit */
@@ -111,7 +110,7 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
     Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     int[] actualNumBytes;
 
-    final static int MAXIMUM_CREW = 4;
+    final static int MAXIMUM_CREW = 3;
 
     boolean isRuning1,isRuning2,isRuning3,isStatD,isStatP,isStatS,isStatC,isStatV,isStatR;
 
@@ -464,8 +463,6 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
         door4C = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.door4c);
         door5O = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.door5o);
         door5C = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.door5c);
-        door6O = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.door6o);
-        door6C = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.door6c);
 
         brilnk = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.brlink);
 
@@ -480,8 +477,6 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
         door4C.setFillAfter(true);
         door5O.setFillAfter(true);
         door5C.setFillAfter(true);
-        door6O.setFillAfter(true);
-        door6C.setFillAfter(true);
         brilnk.setFillAfter(true);
     }
 
@@ -498,13 +493,11 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
         door3 = (ImageView) findViewById(R.id.door3);
         door4 = (ImageView) findViewById(R.id.door4);
         door5 = (ImageView) findViewById(R.id.door5);
-        door6 = (ImageView) findViewById(R.id.door6);
 
         engine = (ImageView) findViewById(R.id.engine);
 
         imgCabLock = (ImageView)findViewById(R.id.imgCabLock);
         imgVaultLock = (ImageView)findViewById(R.id.imgVaultLock);
-        imgRearLock = (ImageView)findViewById(R.id.imgRearLock);
         imgDrvLock = (ImageView)findViewById(R.id.imgDrvLock);
         imgPsgLock = (ImageView)findViewById(R.id.imgPsgLock);
     }
@@ -517,7 +510,7 @@ public void AnimaDoor(int i)
         case 1 :
 
             door1.startAnimation(door1O);
-           AddToDatabase("Driver door open");
+            AddToDatabase("Driver door open");
             break;
 
         case 2 :
@@ -583,16 +576,6 @@ public void AnimaDoor(int i)
                 but_alarm4.clearAnimation();
             }
             break;
-
-        case 15:
-            door6.startAnimation(door6O);
-            AddToDatabase("Rear door open");
-            break;
-        case 16:
-            door6.startAnimation(door6C);
-            AddToDatabase("Rear door close");
-            break;
-
 
         default:
             break;
@@ -2183,7 +2166,6 @@ public void pupupclassini()
         setDoorLock(GlobalVariable.DOOR_LOCK_SIDE, info.getSideDoorLocked());
         setDoorLock(GlobalVariable.DOOR_LOCK_CAB, info.getCabinDoorLocked());
         setDoorLock(GlobalVariable.DOOR_LOCK_VAULT, info.getVaultDoorLocked());
-        setDoorLock(GlobalVariable.DOOR_LOCK_REAR, info.getRearDoorLocked());
     }
 
     private  void DoorOpen(String door)
@@ -2251,16 +2233,6 @@ public void pupupclassini()
             isStatV=true;
             AnimaDoor(5);
         }
-        if(d6.contains("1")&&(isStatR==true))
-        {
-            isStatR=false;
-            AnimaDoor(16);
-        }else if(d6.contains("0")&&(isStatR==false))
-        {
-            isStatR=true;
-            AnimaDoor(15);
-        }
-
     }
 
     private void setDoorLock(int target_door, boolean status)
@@ -2280,9 +2252,6 @@ public void pupupclassini()
                 break;
             case GlobalVariable.DOOR_LOCK_VAULT :
                 setViewVisibility_CrossThread(imgVaultLock, status ? View.VISIBLE : View.INVISIBLE);
-                break;
-            case GlobalVariable.DOOR_LOCK_REAR :
-                setViewVisibility_CrossThread(imgRearLock, status ? View.VISIBLE : View.INVISIBLE);
                 break;
         }
     }
@@ -2466,8 +2435,8 @@ public void pupupclassini()
     @Override
     public void onPause() {
         super.onPause();
-        SendUART("AAA");
-        Log.d("test","PPP");
+        //SendUART("AAA");
+        //Log.d("test","PPP");
     }
 
 
@@ -2551,7 +2520,7 @@ public void pupupclassini()
 
 
             while (isStartHandle) {
-                if (GlobalVariable.connectionType == 1) {
+                //if (GlobalVariable.connectionType == 1) {
                     try {
                         Thread.sleep(50);
                     } catch (InterruptedException e) {
@@ -2568,7 +2537,7 @@ public void pupupclassini()
                     } catch (Exception e) {
                         UIToast("Can't Read" + e.getMessage());
                     }
-                }
+                //}
             }
         }
     }

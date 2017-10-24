@@ -4,7 +4,7 @@
         android:duration="1000"
         android:fromYDelta="0%"
         android:startOffset="0"
-        android:toYDelta="3.9%" />
+        android:toYDelta="-3.9%" />
     <translate
         android:duration="1000"
         android:fromXDelta="0%"

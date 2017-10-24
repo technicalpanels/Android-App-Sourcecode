@@ -184,28 +184,6 @@
 
                             </TableRow>
 
-                            <!-- Rear door -->
-                            <TableRow
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Rear door : "
-                                    android:textSize="18dp"
-                                    android:textStyle="normal"
-                                    android:textColor="@color/topic_color"/>
-
-                                <ToggleButton
-                                    android:id="@+id/btnRearDoorEnabled"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textOn="Enable"
-                                    android:textOff="Disable"/>
-
-                            </TableRow>
 
                         </TableLayout>
 
@@ -347,29 +325,6 @@
 
                                 <ToggleButton
                                     android:id="@+id/btnVaultDoorLockEnabled"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textOn="Enable"
-                                    android:textOff="Disable"/>
-
-                            </TableRow>
-
-                            <!-- Rear door -->
-                            <TableRow
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Rear door lock : "
-                                    android:textSize="18dp"
-                                    android:textStyle="normal"
-                                    android:textColor="@color/topic_color"/>
-
-                                <ToggleButton
-                                    android:id="@+id/btnRearDoorLockEnabled"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textOn="Enable"
