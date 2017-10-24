@@ -163,8 +163,7 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
     final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            byte[] data = new byte[actualNumBytes[0]];
-            System.arraycopy(readBuffer,0,data,0,actualNumBytes[0]);
+            byte[] data = (byte[])msg.obj;
 
             String dbg_msg = String.format("RR2F_INPUT %d bytes : ", data.length);
             for (int i=0; i<data.length; i++) {
@@ -2530,7 +2529,11 @@ public void pupupclassini()
 
                         if (status == 0x00 && actualNumBytes[0] > 0) {
                             synchronized (_locker) {
+                                byte[] data = new byte[actualNumBytes[0]];
+                                System.arraycopy(readBuffer,0,data,0,actualNumBytes[0]);
+
                                 msg = mHandler.obtainMessage();
+                                msg.obj = data;
                                 mHandler.sendMessage(msg);
                             }
                         }
