@@ -206,18 +206,18 @@
                     android:gravity="center_vertical|center_horizontal">
 
                     <Button
+                        android:id="@+id/but_7"
                         android:layout_width="128dp"
                         android:layout_height="wrap_content"
-                        android:text="8"
-                        android:id="@+id/but_8"
-                        android:background="@drawable/buttonnum" />
+                        android:background="@drawable/buttonnum"
+                        android:text="7" />
 
                     <Button
+                        android:id="@+id/but_8"
                         android:layout_width="128dp"
                         android:layout_height="wrap_content"
-                        android:text="7"
-                        android:id="@+id/but_7"
-                        android:background="@drawable/buttonnum" />
+                        android:background="@drawable/buttonnum"
+                        android:text="8" />
 
                     <Button
                         android:layout_width="128dp"

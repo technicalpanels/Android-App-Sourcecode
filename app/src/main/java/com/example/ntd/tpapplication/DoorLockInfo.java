@@ -6,9 +6,9 @@ package com.example.ntd.tpapplication;
 
 public class DoorLockInfo {
 
-    final private int INFO_LEN = 6;
+    final private int INFO_LEN = 7;
 
-    /* <DRV_LCK>,<PSG_LCK>,<SIDE_LCK>,<CAB_LCK>,<VLT_LCK>,<REAR_LCK> */
+    /* <DRV_LCK>,<PSG_LCK>,<SIDE_LCK>,<CAB_LCK>,<VLT_LCK>,<REAR_LCK>,<HATCH> */
 
     final private int DRV_DOOR_LOCK_INDEX = 0;
     final private int PSG_DOOR_LOCK_INDEX = 1;
@@ -16,12 +16,22 @@ public class DoorLockInfo {
     final private int CAB_DOOR_LOCK_INDEX = 3;
     final private int VAULT_DOOR_LOCK_INDEX = 4;
     final private int REAR_DOOR_LOCK_INDEX = 5;
+    final private int HATCH_LOCK_INDEX = 6;
 
     final private String STATUS_LOCK = "1";
     final private String STATUS_UNLOCK = "0";
     final private String SPLITER = ",";
 
     private boolean[] door_lock_status = new boolean[INFO_LEN];
+
+    static private int MIN(int x, int y)
+    {
+        if (x < y) {
+            return x;
+        } else {
+            return y;
+        }
+    }
 
     public DoorLockInfo()
     {
@@ -103,6 +113,16 @@ public class DoorLockInfo {
     {
         door_lock_status[REAR_DOOR_LOCK_INDEX] = locked;
     }
+
+    public boolean getHatchLocked() {
+        return door_lock_status[HATCH_LOCK_INDEX];
+    }
+
+    public void setHatchLocked(boolean locked)
+    {
+        door_lock_status[HATCH_LOCK_INDEX] = locked;
+    }
+
     /***************************************************/
 
 
@@ -110,12 +130,9 @@ public class DoorLockInfo {
     public boolean fromString(String status_str)
     {
         String[] str_arr = status_str.split(SPLITER);
+        int length = MIN(str_arr.length, INFO_LEN);
 
-        if (str_arr.length != INFO_LEN) {
-            return false;
-        }
-
-        for (int i=0; i<INFO_LEN; i++) {
+        for (int i=0; i<length; i++) {
             if (str_arr[i].equals(STATUS_LOCK)) {
                 door_lock_status[i] = true;
             } else {

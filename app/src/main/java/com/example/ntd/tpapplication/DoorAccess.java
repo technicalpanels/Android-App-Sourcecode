@@ -94,6 +94,7 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
     ImageView imgVaultLock;
     ImageView imgDrvLock;
     ImageView imgPsgLock;
+    TextView lblHatchValue;
     RelativeLayout carLayout;
     LinearLayout layoutLogDisplay, layoutParentCar, layoutPassword;
     private CountDownTimer countDownTimer;
@@ -185,6 +186,26 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
         });
     }
 
+    private void TextView_setText_CrossThread(final TextView view, final String text)
+    {
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                view.setText(text);
+            }
+        });
+    }
+
+    private void TextView_setTextColor_CrossThread(final TextView view, final int color)
+    {
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                view.setTextColor(color);
+            }
+        });
+    }
+
     private void ConnectionTypeCheck(int type) {
         GlobalVariable.connectionType = type;
     }
@@ -240,6 +261,7 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
         setDoorLock(GlobalVariable.DOOR_LOCK_CAB, false);
         setDoorLock(GlobalVariable.DOOR_LOCK_VAULT, false);
         setDoorLock(GlobalVariable.DOOR_LOCK_REAR, false);
+        //setDoorLock(GlobalVariable.HATCH_LOCK, false);
 
         Handler hndl = new Handler();
 
@@ -499,6 +521,8 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
         imgVaultLock = (ImageView)findViewById(R.id.imgVaultLock);
         imgDrvLock = (ImageView)findViewById(R.id.imgDrvLock);
         imgPsgLock = (ImageView)findViewById(R.id.imgPsgLock);
+
+        lblHatchValue = (TextView)findViewById(R.id.lblHatchValue);
     }
 
 public void AnimaDoor(int i)
@@ -2165,6 +2189,7 @@ public void pupupclassini()
         setDoorLock(GlobalVariable.DOOR_LOCK_SIDE, info.getSideDoorLocked());
         setDoorLock(GlobalVariable.DOOR_LOCK_CAB, info.getCabinDoorLocked());
         setDoorLock(GlobalVariable.DOOR_LOCK_VAULT, info.getVaultDoorLocked());
+        setDoorLock(GlobalVariable.HATCH_LOCK, info.getHatchLocked());
     }
 
     private  void DoorOpen(String door)
@@ -2251,6 +2276,10 @@ public void pupupclassini()
                 break;
             case GlobalVariable.DOOR_LOCK_VAULT :
                 setViewVisibility_CrossThread(imgVaultLock, status ? View.VISIBLE : View.INVISIBLE);
+                break;
+            case GlobalVariable.HATCH_LOCK :
+                TextView_setText_CrossThread(lblHatchValue, status ? GlobalVariable.LOCK_TEXT : GlobalVariable.UNLOCK_TEXT);
+                TextView_setTextColor_CrossThread(lblHatchValue, status ? GlobalVariable.COLOR_GREEN : GlobalVariable.COLOR_RED);
                 break;
         }
     }

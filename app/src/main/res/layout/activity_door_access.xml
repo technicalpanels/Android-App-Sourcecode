@@ -210,6 +210,31 @@
                         android:layout_height="300dp"
                         android:animateLayoutChanges="true">
 
+                        <TextView
+                            android:id="@+id/lblHatchTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:adjustViewBounds="true"
+                            android:cropToPadding="true"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginLeft="40dp"
+                            android:text="Hatch : "/>
+
+                        <TextView
+                            android:id="@+id/lblHatchValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/red"
+                            android:layout_toRightOf="@+id/lblHatchTitle"
+                            android:layout_alignTop="@+id/lblHatchTitle"
+                            android:layout_alignBottom="@+id/lblHatchTitle"
+                            android:text=""/>
+
                         <ImageView
                             android:id="@+id/carPicture"
                             android:layout_width="match_parent"
@@ -265,7 +290,7 @@
                             android:layout_marginLeft="420dp"
                             android:layout_marginTop="148dp"
                             android:src="@drawable/lock_icon"
-                            android:visibility="visible" />
+                            android:visibility="invisible" />
 
                         <ImageView
                             android:id="@+id/imgVaultLock"
@@ -278,7 +303,7 @@
                             android:layout_marginLeft="478dp"
                             android:layout_marginTop="158dp"
                             android:src="@drawable/lock_icon"
-                            android:visibility="visible" />
+                            android:visibility="invisible" />
 
                         <ImageView
                             android:id="@+id/imgDrvLock"
@@ -291,7 +316,7 @@
                             android:layout_marginLeft="330dp"
                             android:layout_marginTop="225dp"
                             android:src="@drawable/lock_icon"
-                            android:visibility="visible" />
+                            android:visibility="invisible" />
 
                         <ImageView
                             android:id="@+id/imgPsgLock"
@@ -304,7 +329,7 @@
                             android:layout_marginLeft="330dp"
                             android:layout_marginTop="45dp"
                             android:src="@drawable/lock_icon"
-                            android:visibility="visible" />
+                            android:visibility="invisible" />
 
                     </RelativeLayout>
 

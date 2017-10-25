@@ -20,6 +20,13 @@ public class GlobalVariable
     final public static int DOOR_LOCK_CAB = 3;
     final public static int DOOR_LOCK_VAULT = 4;
     final public static int DOOR_LOCK_REAR = 5;
+    final public static int HATCH_LOCK = 6;
+
+    final public static int COLOR_RED = 0xFFFF0000;
+    final public static int COLOR_GREEN = 0xFF00FF00;
+
+    final public static String LOCK_TEXT = "Locked";
+    final public static String UNLOCK_TEXT = "Unlocked";
 
     final public static String RTB_CONFIG_ACTIVITY_EXTRA_PASSIN_NAME = "RTB_CONFIG_ACTIVITY_EXTRA_PASSIN";
     final public static String RTB_CONFIG_ACTIVITY_EXTRA_RETURN_NAME = "RTB_CONFIG_ACTIVITY_EXTRA_RETURN";
