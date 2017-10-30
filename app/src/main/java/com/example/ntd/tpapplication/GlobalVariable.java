@@ -24,9 +24,11 @@ public class GlobalVariable
 
     final public static int COLOR_RED = 0xFFFF0000;
     final public static int COLOR_GREEN = 0xFF00FF00;
+    final public static int COLOR_WHITE = 0xFFFFFFFF;
 
-    final public static String LOCK_TEXT = "Locked";
-    final public static String UNLOCK_TEXT = "Unlocked";
+    final public static String LOCK_TEXT = "Closed";
+    final public static String UNLOCK_TEXT = "Opened";
+    final public static String INVALID_TEXT = "";
 
     final public static String RTB_CONFIG_ACTIVITY_EXTRA_PASSIN_NAME = "RTB_CONFIG_ACTIVITY_EXTRA_PASSIN";
     final public static String RTB_CONFIG_ACTIVITY_EXTRA_RETURN_NAME = "RTB_CONFIG_ACTIVITY_EXTRA_RETURN";

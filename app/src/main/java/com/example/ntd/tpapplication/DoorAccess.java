@@ -255,13 +255,13 @@ public class DoorAccess extends Activity implements  RR2F.RR2FLowLevelInterface,
         ShowTextState(1);
         current_instance=this;
 
-        setDoorLock(GlobalVariable.DOOR_LOCK_DRIVER, false);
-        setDoorLock(GlobalVariable.DOOR_LOCK_PASSENGER, false);
-        setDoorLock(GlobalVariable.DOOR_LOCK_SIDE, false);
-        setDoorLock(GlobalVariable.DOOR_LOCK_CAB, false);
-        setDoorLock(GlobalVariable.DOOR_LOCK_VAULT, false);
-        setDoorLock(GlobalVariable.DOOR_LOCK_REAR, false);
-        //setDoorLock(GlobalVariable.HATCH_LOCK, false);
+        setDoorLock(GlobalVariable.DOOR_LOCK_DRIVER, DoorLockInfo.UNLOCKED);
+        setDoorLock(GlobalVariable.DOOR_LOCK_PASSENGER, DoorLockInfo.UNLOCKED);
+        setDoorLock(GlobalVariable.DOOR_LOCK_SIDE, DoorLockInfo.UNLOCKED);
+        setDoorLock(GlobalVariable.DOOR_LOCK_CAB, DoorLockInfo.UNLOCKED);
+        setDoorLock(GlobalVariable.DOOR_LOCK_VAULT, DoorLockInfo.UNLOCKED);
+        setDoorLock(GlobalVariable.DOOR_LOCK_REAR, DoorLockInfo.UNLOCKED);
+        setDoorLock(GlobalVariable.HATCH_LOCK, DoorLockInfo.INVALID);
 
         Handler hndl = new Handler();
 
@@ -2259,27 +2259,35 @@ public void pupupclassini()
         }
     }
 
-    private void setDoorLock(int target_door, boolean status)
+    private void setDoorLock(int target_door, int status)
     {
         switch (target_door) {
             case GlobalVariable.DOOR_LOCK_DRIVER :
-                setViewVisibility_CrossThread(imgDrvLock, status ? View.VISIBLE : View.INVISIBLE);
+                setViewVisibility_CrossThread(imgDrvLock, (status == DoorLockInfo.LOCKED) ? View.VISIBLE : View.INVISIBLE);
                 break;
             case GlobalVariable.DOOR_LOCK_PASSENGER :
-                setViewVisibility_CrossThread(imgPsgLock, status ? View.VISIBLE : View.INVISIBLE);
+                setViewVisibility_CrossThread(imgPsgLock, (status == DoorLockInfo.LOCKED) ? View.VISIBLE : View.INVISIBLE);
                 break;
             case GlobalVariable.DOOR_LOCK_SIDE :
                 /* There are no lock on SideDoor. */
                 break;
             case GlobalVariable.DOOR_LOCK_CAB :
-                setViewVisibility_CrossThread(imgCabLock, status ? View.VISIBLE : View.INVISIBLE);
+                setViewVisibility_CrossThread(imgCabLock, (status == DoorLockInfo.LOCKED) ? View.VISIBLE : View.INVISIBLE);
                 break;
             case GlobalVariable.DOOR_LOCK_VAULT :
-                setViewVisibility_CrossThread(imgVaultLock, status ? View.VISIBLE : View.INVISIBLE);
+                setViewVisibility_CrossThread(imgVaultLock, (status == DoorLockInfo.LOCKED) ? View.VISIBLE : View.INVISIBLE);
                 break;
             case GlobalVariable.HATCH_LOCK :
-                TextView_setText_CrossThread(lblHatchValue, status ? GlobalVariable.LOCK_TEXT : GlobalVariable.UNLOCK_TEXT);
-                TextView_setTextColor_CrossThread(lblHatchValue, status ? GlobalVariable.COLOR_GREEN : GlobalVariable.COLOR_RED);
+                if (status == DoorLockInfo.LOCKED) {
+                    TextView_setText_CrossThread(lblHatchValue, GlobalVariable.LOCK_TEXT);
+                    TextView_setTextColor_CrossThread(lblHatchValue, GlobalVariable.COLOR_GREEN);
+                } else if (status == DoorLockInfo.UNLOCKED) {
+                    TextView_setText_CrossThread(lblHatchValue, GlobalVariable.UNLOCK_TEXT);
+                    TextView_setTextColor_CrossThread(lblHatchValue, GlobalVariable.COLOR_RED);
+                } else {
+                    TextView_setText_CrossThread(lblHatchValue, GlobalVariable.INVALID_TEXT);
+                    TextView_setTextColor_CrossThread(lblHatchValue, GlobalVariable.COLOR_WHITE);
+                }
                 break;
         }
     }

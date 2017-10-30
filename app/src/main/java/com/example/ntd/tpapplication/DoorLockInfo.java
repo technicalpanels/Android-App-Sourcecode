@@ -22,7 +22,11 @@ public class DoorLockInfo {
     final private String STATUS_UNLOCK = "0";
     final private String SPLITER = ",";
 
-    private boolean[] door_lock_status = new boolean[INFO_LEN];
+    final public static int UNLOCKED = 0;
+    final public static int LOCKED = 1;
+    final public static int INVALID = 2;
+
+    private int[] door_lock_status = new int[INFO_LEN];
 
     static private int MIN(int x, int y)
     {
@@ -44,81 +48,81 @@ public class DoorLockInfo {
     }
 
     /******************** Driver door ********************/
-    public boolean getDriverDoorLocked()
+    public int getDriverDoorLocked()
     {
         return door_lock_status[DRV_DOOR_LOCK_INDEX];
     }
 
-    public void setDriverDoorLocked(boolean locked)
+    public void setDriverDoorLocked(int locked)
     {
         door_lock_status[DRV_DOOR_LOCK_INDEX] = locked;
     }
     /*****************************************************/
 
     /******************** Passenger door ********************/
-    public boolean getPassengerDoorLocked()
+    public int getPassengerDoorLocked()
     {
         return door_lock_status[PSG_DOOR_LOCK_INDEX];
     }
 
-    public void setPasssengerDoorLocked(boolean locked)
+    public void setPasssengerDoorLocked(int locked)
     {
         door_lock_status[PSG_DOOR_LOCK_INDEX] = locked;
     }
     /********************************************************/
 
     /******************** Side door ********************/
-    public boolean getSideDoorLocked()
+    public int getSideDoorLocked()
     {
         return door_lock_status[SIDE_DOOR_LOCK_INDEX];
     }
 
-    public void setSideDoorLocked(boolean locked)
+    public void setSideDoorLocked(int locked)
     {
         door_lock_status[SIDE_DOOR_LOCK_INDEX] = locked;
     }
     /***************************************************/
 
     /******************** Cabin door ********************/
-    public boolean getCabinDoorLocked()
+    public int getCabinDoorLocked()
     {
         return door_lock_status[CAB_DOOR_LOCK_INDEX];
     }
 
-    public void setCabinDoorLocked(boolean locked)
+    public void setCabinDoorLocked(int locked)
     {
         door_lock_status[CAB_DOOR_LOCK_INDEX] = locked;
     }
     /****************************************************/
 
     /******************** Vault door ********************/
-    public boolean getVaultDoorLocked()
+    public int getVaultDoorLocked()
     {
         return door_lock_status[VAULT_DOOR_LOCK_INDEX];
     }
 
-    public void setVaultDoorLocked(boolean locked)
+    public void setVaultDoorLocked(int locked)
     {
         door_lock_status[VAULT_DOOR_LOCK_INDEX] = locked;
     }
     /****************************************************/
 
     /******************** Rear door ********************/
-    public boolean getRearDoorLocked()
+    public int getRearDoorLocked()
     {
         return door_lock_status[REAR_DOOR_LOCK_INDEX];
     }
 
-    public void setRearDoorLocked(boolean locked)
+    public void setRearDoorLocked(int locked)
     {
         door_lock_status[REAR_DOOR_LOCK_INDEX] = locked;
     }
 
-    public boolean getHatchLocked() {
+    public int getHatchLocked() {
         return door_lock_status[HATCH_LOCK_INDEX];
     }
 
-    public void setHatchLocked(boolean locked)
+    public void setHatchLocked(int locked)
     {
         door_lock_status[HATCH_LOCK_INDEX] = locked;
     }
@@ -130,13 +134,18 @@ public class DoorLockInfo {
     public boolean fromString(String status_str)
     {
         String[] str_arr = status_str.split(SPLITER);
-        int length = MIN(str_arr.length, INFO_LEN);
 
-        for (int i=0; i<length; i++) {
-            if (str_arr[i].equals(STATUS_LOCK)) {
-                door_lock_status[i] = true;
+        for (int i=0; i<INFO_LEN; i++) {
+            if (i < str_arr.length) {
+                if (str_arr[i].equals(STATUS_LOCK)) {
+                    door_lock_status[i] = LOCKED;
+                } else if (str_arr[i].equals(STATUS_UNLOCK)) {
+                    door_lock_status[i] = UNLOCKED;
+                } else {
+                    door_lock_status[i] = INVALID;
+                }
             } else {
-                door_lock_status[i] = false;
+                door_lock_status[i] = INVALID;
             }
         }
 
@@ -145,15 +154,15 @@ public class DoorLockInfo {
 
     public String toString()
     {
-        boolean[] statuses = new boolean[INFO_LEN];
-
         String ret = "";
 
         for (int i=0; i<INFO_LEN; i++) {
-            if (door_lock_status[i]) {
+            if (door_lock_status[i] == LOCKED) {
                 ret += STATUS_LOCK;
-            } else {
+            } else  if (door_lock_status[i] == UNLOCKED) {
                 ret += STATUS_UNLOCK;
+            } else {
+                ret += STATUS_LOCK;
             }
 
             if (i<(INFO_LEN-1)) {

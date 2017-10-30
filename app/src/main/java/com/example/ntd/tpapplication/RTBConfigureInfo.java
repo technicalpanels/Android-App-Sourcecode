@@ -32,7 +32,9 @@ public class RTBConfigureInfo {
     private boolean[] door_status = new boolean[INFO_LEN];
 
     public RTBConfigureInfo() {
-
+        for (int i=0; i<INFO_LEN; i++) {
+            door_status[i] = true;
+        }
     }
 
     public RTBConfigureInfo(String parse_str) {
